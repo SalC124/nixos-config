@@ -21,6 +21,7 @@
     # ./nvf/nvf-config.nix
     # ./vm-passthrough.nix # DONT USE
     # ./virtual-machine.nix
+    ./speaking-of-guacamole/guac.nix
   ];
 
   nix.settings.experimental-features = [
@@ -191,7 +192,6 @@
 
     # pkgs.microsoft-edge
     pkgs.microsoft-edge
-    pkgs.firefox
     # inputs.zen-browser.packages.x86_64-linux.twilight
     inputs.zen-browser.packages.x86_64-linux.default
     # pkgs.neovim
@@ -356,6 +356,8 @@
   services.ollama = {
     enable = true;
     acceleration = "rocm";
+    package = pkgs.ollama-rocm;
+    rocmOverrideGfx = "11.0.0";
   };
 
   # TODO fix
@@ -366,6 +368,7 @@
     NIXOS_OZONE_WL = "1";
     FLAKE = "/etc/nixos/";
     NIXPKGS_ALLOW_INSECURE = "1";
+    HSA_OVERRIDE_GFX_VERSION = "11.0.0";
 
     # GDK_BACKEND = "x11"; # NEVER USE THIS WITH HYPRLAND
   };

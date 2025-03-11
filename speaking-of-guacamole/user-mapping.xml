@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<user-mapping>
+    <!-- User using SHA-256 to hash the password -->
+    <authorize
+        username="saltcal"
+        password="e4fab55e051cf7e98c8ba526eba9e6f039294f0c490d761b5a5466a9938c43b3"
+        encoding="sha256">
+
+        <connection name="NixOS Server SSH">
+            <protocol>ssh</protocol>
+            <param name="hostname">127.0.0.1</param>
+            <param name="port">22</param>
+        </connection>
+
+        <!--RDP (doesnt work with Hyprland)
+        <connection name="NixOS Server RDP">
+          <protocol>rdp</protocol>
+          <param name="hostname">127.0.0.1</param>
+          <param name="port">3389</param>
+          <param name="ignore-cert">true</param>
+        </connection>
+        -->
+
+      <connection name="NixOS Server VNC">
+          <protocol>vnc</protocol>
+          <param name="hostname">127.0.0.1</param>
+          <param name="port">5900</param>
+          <param name="ignore-cert">true</param>
+      </connection>
+    </authorize>
+</user-mapping>
