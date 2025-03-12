@@ -212,7 +212,6 @@
               };
               javascript = {
                 __unkeyed-1 = "prettierd";
-                timeout_ms = 2000;
                 stop_after_first = true;
               };
               typescript = {

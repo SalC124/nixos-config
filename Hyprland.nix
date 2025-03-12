@@ -11,6 +11,8 @@
     wayland = true;
   };
   services.displayManager.defaultSession = "hyprland";
+  services.upower.ignoreLid = true;
+  services.logind.extraConfig = "HandleLidSwitch=ignore";
 
   programs.hyprland = {
     enable = true;

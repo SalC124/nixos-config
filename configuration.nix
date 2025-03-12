@@ -207,6 +207,7 @@
     pkgs.fzf
     pkgs.lsd
     pkgs.yazi
+    pkgs.tmux
 
     pkgs.partimage
     pkgs.gparted
