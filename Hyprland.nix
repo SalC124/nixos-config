@@ -12,6 +12,7 @@
   };
   services.displayManager.defaultSession = "hyprland";
   services.logind.lidSwitch = "ignore";
+  services.logind.powerKey = "suspend";
 
   programs.hyprland = {
     enable = true;

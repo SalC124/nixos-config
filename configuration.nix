@@ -143,8 +143,8 @@
       vs = "cd ~/ && sudo code --no-sandbox --user-data-dir='.config/Code'";
       sysflk = "sudo vi /etc/nixos/flake.nix";
       nvedit = "sudo vi /etc/nixos/nixvim/";
-      kys = "systemctl poweroff";
-      brb = "systemctl reboot";
+      kys = "tmux kill-server && systemctl poweroff";
+      brb = "tmux kill-server && systemctl reboot";
       update = "cd /etc/nixos/ && sudo nix flake update";
       ls = "lsd -A";
       yz = "yazi";

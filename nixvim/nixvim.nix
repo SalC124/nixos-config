@@ -31,6 +31,7 @@
         ignorecase = true;
         undofile = true; # Build-in persistent undo
         undolevels = 10000;
+        conceallevel = 2;
       };
 
       plugins = {
@@ -225,11 +226,11 @@
               };
               lua = [ "stylua" ];
               nix = [ "nixpkgs-fmt" ];
-              markdown = {
-                __unkeyed-1 = "prettierd";
-                timeout_ms = 2000;
-                stop_after_first = true;
-              };
+              # markdown = {
+              #   __unkeyed-1 = "prettierd";
+              #   timeout_ms = 2000;
+              #   stop_after_first = true;
+              # };
               yaml = [
                 [
                   "prettierd"

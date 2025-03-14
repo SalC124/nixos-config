@@ -18,7 +18,7 @@
     pkgs.dolphin-emu
     pkgs.lutris
 
-    pkgs.modrinth-app
+    # pkgs.modrinth-app
     pkgs.ferium
     pkgs.prismlauncher
   ];
