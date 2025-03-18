@@ -22,6 +22,7 @@
     # ./vm-passthrough.nix # DONT USE
     # ./virtual-machine.nix
     ./speaking-of-guacamole/guac.nix
+    ./hacking/intermediary.nix
   ];
 
   nix.settings.experimental-features = [

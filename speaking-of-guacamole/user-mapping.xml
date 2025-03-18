@@ -10,6 +10,7 @@
             <protocol>ssh</protocol>
             <param name="hostname">127.0.0.1</param>
             <param name="port">22</param>
+            <param name="font-name">CaskaydiaCove Nerd Font Mono</param>
         </connection>
 
         <!--RDP (doesnt work with Hyprland)
