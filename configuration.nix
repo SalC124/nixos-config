@@ -16,13 +16,14 @@
     ./amd.nix
     # ./style.nix
     ./syncthing.nix
-    ./nixvim/nixvim.nix
+    # ./nixvim/nixvim.nix
     # ./minecraft-server.nix
     # ./nvf/nvf-config.nix
     # ./vm-passthrough.nix # DONT USE
     # ./virtual-machine.nix
     ./speaking-of-guacamole/guac.nix
     ./hacking/intermediary.nix
+    ./nxtvim
   ];
 
   nix.settings.experimental-features = [
@@ -144,8 +145,8 @@
       vs = "cd ~/ && sudo code --no-sandbox --user-data-dir='.config/Code'";
       sysflk = "sudo vi /etc/nixos/flake.nix";
       nvedit = "sudo vi /etc/nixos/nixvim/";
-      kys = "tmux kill-server && systemctl poweroff";
-      brb = "tmux kill-server && systemctl reboot";
+      kys = "systemctl poweroff";
+      brb = "systemctl reboot";
       update = "cd /etc/nixos/ && sudo nix flake update";
       ls = "lsd -A";
       yz = "yazi";
