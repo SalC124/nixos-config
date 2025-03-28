@@ -1,4 +1,4 @@
-{ ... }: {
+{ pkgs, ... }: {
   programs.nixvim = {
     enable = true;
     enableMan = true;
@@ -14,4 +14,7 @@
       ./keymaps.nix
     ];
   };
+  environment.systemPackages = with pkgs; [
+    typescript
+  ];
 }

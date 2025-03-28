@@ -1,6 +1,10 @@
 { ... }: {
   plugins = {
-    notify.enable = true;
+    web-devicons.enable = true;
+    notify = {
+      enable = true;
+        timeout = 50;
+    };
     noice.enable = true;
     transparent.enable = true;
     lualine.enable = true;

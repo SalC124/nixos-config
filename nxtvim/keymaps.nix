@@ -65,6 +65,15 @@
           desc = "Format File";
         };
       }
+      {
+        key = "<leader>Rf";
+        action = "<cmd> RustFmt <CR>";
+        mode = "n";
+        options = {
+          silent = true;
+          desc = "Format File";
+        };
+      }
 
     ];
   };

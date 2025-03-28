@@ -26,10 +26,13 @@
     ./nxtvim
   ];
 
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
+  nix.settings = {
+    auto-optimise-store = true;
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+  };
   time.hardwareClockInLocalTime = true;
   # Boot loader
   boot.loader = {
@@ -144,31 +147,19 @@
       nixdir = "cd /etc/nixos/ && sudo vi ./";
       vs = "cd ~/ && sudo code --no-sandbox --user-data-dir='.config/Code'";
       sysflk = "sudo vi /etc/nixos/flake.nix";
-      nvedit = "sudo vi /etc/nixos/nixvim/";
+      nvedit = "sudo vi /etc/nixos/nxtvim/";
       kys = "systemctl poweroff";
       brb = "systemctl reboot";
       update = "cd /etc/nixos/ && sudo nix flake update";
       ls = "lsd -A";
       yz = "yazi";
-      zj = "zellij";
+      kill-zj = ''zellij kill-all-sessions -y || echo "why dont you read with your eyes?" && zellij delete-all-sessions -y'';
       barbs = ''cd "/home/saltcal/Code/School/24-25/Python with Barb/" && nix develop'';
       nv = ''vi ./'';
       envy = ''vi ./'';
       rpi-ws-fs = ''sudo sshfs -o allow_other,default_permissions saltcal@67.84.35.204:/ /media/rp-sd && cd /media/rp-sd/'';
       rpi-ws-ssh = ''kitten ssh saltcal@67.84.35.204'';
     };
-    # plugins = [
-    #   {
-    #     name = "zsh-nix-shell";
-    #     file = "nix-shell.plugin.zsh";
-    #     src = pkgs.fetchFromGitHub {
-    #       owner = "chisui";
-    #       repo = "zsh-nix-shell";
-    #       rev = "v0.8.0";
-    #       sha256 = "1lzrn0n4fxfcgg65v0qhnj7wnybybqzs4adz7xsrkgmcsr0ii8b7";
-    #     };
-    #   }
-    # ];
 
     ohMyZsh = {
       enable = true;
@@ -221,7 +212,10 @@
     # pkgs.neovim
     pkgs.gitFull
     pkgs.gh
-    pkgs.arduino-ide
+    pkgs.arduino
+    pkgs.arduino-cli
+    # pkgs.arduino-core
+    # pkgs.arduino-ide
     pkgs.simulide
     # pkgs.vscode-fhs
     pkgs.vscode-fhs

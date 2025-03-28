@@ -1,4 +1,4 @@
-{ ... }: {
+{ pkgs, ... }: {
   plugins = {
     lspkind.enable = true; # Icons for CMP
 
@@ -25,8 +25,12 @@
       ];
       settings.mapping = {
         "<C-j>" = "cmp.mapping.select_next_item()";
+
         "<C-k>" = "cmp.mapping.select_prev_item()";
         "<C-CR>" = "cmp.mapping.confirm({ select = true })";
+
+        "<Tab-CR>" = "cmp.mapping.confirm({ select = true })";
+
         # "<C-Tab>" = "cmp.mapping.select_next_item()";
         # "<C-Space>" = "cmp.mapping.complete()";
         # "<C-Esc>" = "cmp.mapping.close()";
@@ -43,6 +47,10 @@
       sources.formatting = {
         nixpkgs_fmt.enable = true;
         prettierd.enable = true;
+        black.enable = true;
+        google_java_format.enable = true;
+        ktlint.enable = true;
+        # jq.enable = true;
       };
     };
     lsp = {
@@ -52,7 +60,9 @@
         cssls.enable = true;
         html.enable = true;
         bashls.enable = true;
-        pylsp.enable = true;
+        pyright.enable = true;
+        kotlin_language_server.enable = true;
+        jsonls.enable = true;
       };
     };
 
