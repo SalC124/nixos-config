@@ -14,9 +14,9 @@
     # nix-minecraft.url = "github:Infinidoge/nix-minecraft";
     # stylix.url = "github:danth/stylix"; # /cf8b6e2d4e8aca8ef14b839a906ab5eb98b08561";
     nixvim = {
-      url = "github:nix-community/nixvim/nixos-24.11";
+      url = "github:nix-community/nixvim/";
       # If using a stable channel you can use `url = "github:nix-community/nixvim/nixos-<version>"`
-      inputs.nixpkgs.follows = "nixpkgs";
+      #inputs.nixpkgs.follows = "nixpkgs";
     };
     nvf = {
       url = "github:notashelf/nvf";

@@ -24,6 +24,7 @@
     ./speaking-of-guacamole/guac.nix
     ./hacking/intermediary.nix
     ./nxtvim
+    # ./wine.nix
   ];
 
   nix.settings = {
@@ -293,6 +294,13 @@
 
     pkgs.musescore
     pkgs.muse-sounds-manager
+
+    pkgs.rustc
+    pkgs.cargo
+    pkgs.rustfmt
+    pkgs.rustup
+    pkgs.gcc-arm-embedded-11 # 13 is broken
+    pkgs.unixtools.xxd
   ];
 
   programs.java = {
@@ -424,4 +432,5 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.11"; # Did you read the comment?
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 }

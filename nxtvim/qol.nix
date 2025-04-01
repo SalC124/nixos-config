@@ -18,7 +18,6 @@
       window.position = "right";
       window.width = 24;
     };
-    # colorizer.enable = true; WARN doesnt exist yet
-    nvim-colorizer.enable = true; #works instead ig
+    colorizer.enable = true;
   };
 }

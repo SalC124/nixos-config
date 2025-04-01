@@ -3,9 +3,20 @@
     web-devicons.enable = true;
     notify = {
       enable = true;
+      settings = {
         timeout = 50;
+        render = "wrapped-compact";
+      };
     };
-    noice.enable = true;
+    noice = {
+      enable = true;
+      settings = {
+        notify = {
+          enabled = true;
+          view = "notify";
+        };
+      };
+    };
     transparent.enable = true;
     lualine.enable = true;
   };
