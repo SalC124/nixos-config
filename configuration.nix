@@ -160,6 +160,8 @@
       envy = ''vi ./'';
       rpi-ws-fs = ''sudo sshfs -o allow_other,default_permissions saltcal@67.84.35.204:/ /media/rp-sd && cd /media/rp-sd/'';
       rpi-ws-ssh = ''kitten ssh saltcal@67.84.35.204'';
+      zj = ''zellij'';
+      ardwork = ''sudo chmod a+rw /dev/ttyACM0'';
     };
 
     ohMyZsh = {
@@ -196,6 +198,9 @@
     pkgs.ntfs3g
     pkgs.tree
     pkgs.sshfs
+    pkgs.p7zip
+    pkgs.rar
+
 
     pkgs.zoxide
     pkgs.fzf
@@ -213,7 +218,8 @@
     # pkgs.neovim
     pkgs.gitFull
     pkgs.gh
-    pkgs.arduino
+    # pkgs.arduino
+    pkgs.arduino-ide
     pkgs.arduino-cli
     # pkgs.arduino-core
     # pkgs.arduino-ide
@@ -254,6 +260,10 @@
     pkgs.gradle
     pkgs.jupyter-all
     pkgs.kotlin
+    pkgs.kicad
+    pkgs.ngspice
+    pkgs.logisim-evolution
+    pkgs.gnumake
 
     pkgs.fabric-ai
 
@@ -299,6 +309,28 @@
     pkgs.cargo
     pkgs.rustfmt
     pkgs.rustup
+    pkgs.gccgo14
+    pkgs.wasm-pack
+    pkgs.cargo-generate
+
+    # esp32 + rust
+    pkgs.ldproxy
+    pkgs.espup
+    pkgs.git
+    pkgs.wget
+    pkgs.gnumake
+    pkgs.flex
+    pkgs.bison
+    pkgs.gperf
+    pkgs.pkg-config
+    pkgs.cmake
+    pkgs.ncurses5
+    pkgs.ninja
+    (pkgs.python3.withPackages (p: with p; [
+      pip
+      virtualenv
+    ]))
+
     pkgs.gcc-arm-embedded-11 # 13 is broken
     pkgs.unixtools.xxd
   ];
@@ -374,8 +406,9 @@
     FLAKE = "/etc/nixos/";
     NIXPKGS_ALLOW_INSECURE = "1";
     HSA_OVERRIDE_GFX_VERSION = "11.0.0";
-
     # GDK_BACKEND = "x11"; # NEVER USE THIS WITH HYPRLAND
+    LIBCLANG_PATH = "/home/saltcal/.rustup/toolchains/esp/xtensa-esp32-elf-clang/esp-18.1.2_20240912/esp-clang/lib";
+    PATH = "/home/saltcal/.rustup/toolchains/esp/xtensa-esp-elf/esp-14.2.0_20240906/xtensa-esp-elf/bin:$PATH";
   };
   services.xserver.videoDrivers = [ "amdgpu" ];
 

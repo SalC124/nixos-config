@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   plugins = {
     nix-develop.enable = true;
@@ -18,6 +18,16 @@
       window.position = "right";
       window.width = 24;
     };
-    colorizer.enable = true;
+    nvim-colorizer.enable = true;
+    image = {
+      enable = true;
+    };
+    clipboard-image = {
+      enable = true;
+      clipboardPackage = pkgs.wl-clipboard;
+    };
+    cmp-spell = {
+      enable = true;
+    };
   };
 }

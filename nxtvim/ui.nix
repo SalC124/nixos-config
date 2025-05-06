@@ -3,10 +3,10 @@
     web-devicons.enable = true;
     notify = {
       enable = true;
-      settings = {
+      #settings = {
         timeout = 50;
         render = "wrapped-compact";
-      };
+      #};
     };
     noice = {
       enable = true;
@@ -17,14 +17,14 @@
         };
       };
     };
-    transparent.enable = true;
+    transparent.enable = false;
     lualine.enable = true;
   };
   colorschemes.catppuccin = {
     enable = true;
     settings = {
       transparent_background = true;
-      disable_underline = true;
+      disable_underline = false;
       flavour = "mocha"; # mocha or frappe
       integrations = {
         treesitter = true;
