@@ -2,7 +2,6 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 { pkgs
-, uncpkgs
 , inputs
 , ...
 }: {
@@ -187,9 +186,9 @@
   environment.systemPackages = [
     pkgs.nh
 
-    uncpkgs.microsoft-edge
+    inputs.uncpkgs.microsoft-edge
     # inputs.zen-browser.packages.x86_64-linux.twilight
-    inputs.zen-browser.packages.x86_64-linux.default
+    # inputs.zen-browser.packages.x86_64-linux.default
     # pkgs.neovim
     pkgs.ripgrep
     pkgs.zsh-powerlevel10k
@@ -346,7 +345,7 @@
     ]))
     pkgs.espflash
 
-    pkgs.gcc-arm-embedded-11 # 13 is broken
+    pkgs.gcc-arm-embedded # 13 is broken
     pkgs.unixtools.xxd
   ];
   programs.nix-ld.enable = true;
@@ -467,12 +466,14 @@
     fira-code
     fira-code-symbols
     font-awesome
-    nerdfonts
-    # (nerdfonts.override { fonts = [
-    #     "JetBrainsMono"
-    #   ];
-    # })
-    # JetBrainsMono
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.caskaydia-mono
+    # nerdfonts
+    # # (nerdfonts.override { fonts = [
+    # #     "JetBrainsMono"
+    # #   ];
+    # # })
+    # # JetBrainsMono
   ];
 
   # This value determines the NixOS release from which the default
