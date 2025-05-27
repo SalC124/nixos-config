@@ -2,6 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 { pkgs
+, uncpkgs
 , inputs
 , ...
 }: {
@@ -21,7 +22,7 @@
     # ./nvf/nvf-config.nix
     # ./vm-passthrough.nix # DONT USE
     # ./virtual-machine.nix
-    ./speaking-of-guacamole/guac.nix
+    # ./speaking-of-guacamole/guac.nix
     ./hacking/intermediary.nix
     ./nxtvim
     # ./wine.nix
@@ -161,7 +162,7 @@
       rpi-ws-fs = ''sudo sshfs -o allow_other,default_permissions saltcal@67.84.35.204:/ /media/rp-sd && cd /media/rp-sd/'';
       rpi-ws-ssh = ''kitten ssh saltcal@67.84.35.204'';
       zj = ''zellij'';
-      ardwork = ''sudo chmod a+rw /dev/ttyACM0'';
+      ardwork = ''sudo chmod a+rw /dev/ttyACM0 && sudo chmod a+rw /dev/ttyUSB0'';
     };
 
     ohMyZsh = {
@@ -186,8 +187,7 @@
   environment.systemPackages = [
     pkgs.nh
 
-    # pkgs.microsoft-edge
-    pkgs.microsoft-edge
+    uncpkgs.microsoft-edge
     # inputs.zen-browser.packages.x86_64-linux.twilight
     inputs.zen-browser.packages.x86_64-linux.default
     # pkgs.neovim
@@ -200,7 +200,6 @@
     pkgs.sshfs
     pkgs.p7zip
     pkgs.rar
-
 
     pkgs.zoxide
     pkgs.fzf
@@ -299,11 +298,21 @@
     pkgs.via
     pkgs.framework-tool
     pkgs.corefonts
+    pkgs.ngspice
+
+    pkgs.cbonsai
 
     # pkgs.waydroid DO NOT INSTALL, JUST FOR REFERENCE
 
     pkgs.musescore
     pkgs.muse-sounds-manager
+
+    pkgs.weechat
+
+    # general tso's chicken
+    pkgs.bat
+    pkgs.eza
+    pkgs.ncspot
 
     pkgs.rustc
     pkgs.cargo
@@ -312,6 +321,11 @@
     pkgs.gccgo14
     pkgs.wasm-pack
     pkgs.cargo-generate
+    pkgs.openssl
+
+    pkgs.trunk
+    pkgs.dioxus-cli
+    pkgs.cargo-tauri
 
     # esp32 + rust
     pkgs.ldproxy
@@ -330,10 +344,12 @@
       pip
       virtualenv
     ]))
+    pkgs.espflash
 
     pkgs.gcc-arm-embedded-11 # 13 is broken
     pkgs.unixtools.xxd
   ];
+  programs.nix-ld.enable = true;
 
   programs.java = {
     enable = true;
@@ -408,9 +424,10 @@
     HSA_OVERRIDE_GFX_VERSION = "11.0.0";
     # GDK_BACKEND = "x11"; # NEVER USE THIS WITH HYPRLAND
     LIBCLANG_PATH = "/home/saltcal/.rustup/toolchains/esp/xtensa-esp32-elf-clang/esp-18.1.2_20240912/esp-clang/lib";
-    PATH = "/home/saltcal/.rustup/toolchains/esp/xtensa-esp-elf/esp-14.2.0_20240906/xtensa-esp-elf/bin:$PATH";
+    PATH = "/home/saltcal/Code/Personal/rust/projects/weather/target/release:/home/saltcal/.cargo/bin:/home/saltcal/Code/Personal/rust/projects/prostrate_man/target/release:/home/saltcal/.rustup/toolchains/esp/xtensa-esp-elf/esp-14.2.0_20240906/xtensa-esp-elf/bin:$PATH";
+    PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
+    ROCKET_CODEGEN_DEBUG = "1";
   };
-  services.xserver.videoDrivers = [ "amdgpu" ];
 
   xdg.portal.enable = true;
   xdg.portal.wlr.enable = true;

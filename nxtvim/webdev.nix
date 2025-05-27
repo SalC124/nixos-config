@@ -1,6 +1,13 @@
 { ... }: {
   plugins = {
-    ts-autotag.enable = true;
+    ts-autotag = {
+      enable = true;
+      settings = {
+        aliases = {
+          rust = "typescriptreact";
+        };
+      };
+    };
     typescript-tools.enable = true;
     # sandwich = {
     #   enable = true;
@@ -10,4 +17,18 @@
     # not webdev but too bad:
     rustaceanvim.enable = true;
   };
+  extraConfigLuaPost = ''
+    return {
+      {
+        "neovim/nvim-lspconfig",
+        init_options = {
+          userLanguages = {
+            eelixir = "html-eex",
+            eruby = "erb",
+            rust = "html",
+          },
+        },
+      },
+    }
+  '';
 }

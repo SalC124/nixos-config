@@ -2,7 +2,8 @@
   description = "system flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-24.11";
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-25.05";
+    uncpkgs.url = "github:nixos/nixpkgs?ref=nixos-24.11";
     # nixpkgs-unstable.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     # hyprland.url = "github:hyprwm/Hyprland";
@@ -35,20 +36,20 @@
     { nixpkgs
     , nixos-hardware
     , # home-manager,
-      # nixpkgs-unstable,
-      # stylix,
+      uncpkgs
+    , # stylix,
       # solaar,
       nixvim
     , nvf
     , # nix-minecraft,
       ...
     } @ inputs:
-    # let
-    #   inputs.pkgs-unstable = import nixpkgs-unstable {
-    #     system = "x86_64-linux";
-    #     config.allowUnfree = true;
-    #   };
-    # in
+    let
+      inputs.uncpkgs = import uncpkgs {
+        system = "x86_64-linux";
+        config.allowUnfree = true;
+      };
+    in
     {
       nixosConfigurations.alpha-compooper = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
