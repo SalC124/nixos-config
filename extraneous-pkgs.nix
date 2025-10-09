@@ -21,6 +21,9 @@
     # pkgs.modrinth-app
     pkgs.ferium
     pkgs.prismlauncher
+
+    # pkgs.retroarch-full
+    # pkgs.retroarch-assets
   ];
 
   environment.sessionVariables = {

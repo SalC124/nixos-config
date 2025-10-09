@@ -4,8 +4,8 @@
     notify = {
       enable = true;
       #settings = {
-        timeout = 50;
-        render = "wrapped-compact";
+      timeout = 50;
+      render = "wrapped-compact";
       #};
     };
     noice = {

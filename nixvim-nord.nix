@@ -35,7 +35,7 @@
         luasnip.enable = true;
         nix.enable = true;
         conform-nvim = {
-        # settings = { formatters_by_ft.python = [ "black" ]; };
+          # settings = { formatters_by_ft.python = [ "black" ]; };
         };
         neo-tree.enable = true;
         which-key.enable = true;
@@ -53,17 +53,17 @@
             pylsp = {
               enable = true;
               # settings.plugins = {
-                # black.enabled = true;
-                # flake8.enabled = true;
-                # isort.enabled = true;
-                # jedi.enabled = true;
-                # mccabe.enabled = true;
-                # pycodestyle.enabled = true;
-                # pydocstyle.enabled = true;
-                # pyflakes.enabled = true;
-                # pylint.enabled = true;
-                # rope.enabled = true;
-                # yapf.enabled = true;
+              # black.enabled = true;
+              # flake8.enabled = true;
+              # isort.enabled = true;
+              # jedi.enabled = true;
+              # mccabe.enabled = true;
+              # pycodestyle.enabled = true;
+              # pydocstyle.enabled = true;
+              # pyflakes.enabled = true;
+              # pylint.enabled = true;
+              # rope.enabled = true;
+              # yapf.enabled = true;
               # };
             };
           };
@@ -85,7 +85,7 @@
           enable_sidebar_background = true;
         };
       };
-      
+
       enable = true;
       enableMan = true;
       defaultEditor = true;

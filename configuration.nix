@@ -21,9 +21,9 @@
     # ./nvf/nvf-config.nix
     # ./vm-passthrough.nix # DONT USE
     # ./virtual-machine.nix
-    # ./speaking-of-guacamole/guac.nix
+    ./speaking-of-guacamole/guac.nix
     ./hacking/intermediary.nix
-    ./nxtvim
+    # ./nxtvim
     # ./wine.nix
   ];
 
@@ -34,6 +34,7 @@
       "flakes"
     ];
   };
+
   time.hardwareClockInLocalTime = true;
   # Boot loader
   boot.loader = {
@@ -107,10 +108,12 @@
 
   users.defaultUserShell = pkgs.zsh;
 
-  # programs.neovim = {
-  #   enable = true;
-  #   defaultEditor = true;
-  # };
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+    viAlias = true;
+    vimAlias = true;
+  };
 
   programs.git = {
     enable = true;
@@ -120,7 +123,7 @@
       init = {
         defaultBranch = "main";
       };
-      safe.directory = "/etc/nixos/";
+      safe.directory = "*";
 
     };
   };
@@ -149,19 +152,22 @@
       vs = "cd ~/ && sudo code --no-sandbox --user-data-dir='.config/Code'";
       sysflk = "sudo vi /etc/nixos/flake.nix";
       nvedit = "sudo vi /etc/nixos/nxtvim/";
-      kys = "systemctl poweroff";
-      brb = "systemctl reboot";
+      kys = ''echo "u too"; systemctl poweroff'';
+      brb = ''echo "buh-bye!"; systemctl reboot'';
+      eep = ''echo "zzz..."; systemctl sleep'';
       update = "cd /etc/nixos/ && sudo nix flake update";
       ls = "lsd -A";
       yz = "yazi";
       kill-zj = ''zellij kill-all-sessions -y || echo "why dont you read with your eyes?" && zellij delete-all-sessions -y'';
-      barbs = ''cd "/home/saltcal/Code/School/24-25/Python with Barb/" && nix develop'';
       nv = ''vi ./'';
       envy = ''vi ./'';
       rpi-ws-fs = ''sudo sshfs -o allow_other,default_permissions saltcal@67.84.35.204:/ /media/rp-sd && cd /media/rp-sd/'';
       rpi-ws-ssh = ''kitten ssh saltcal@67.84.35.204'';
       zj = ''zellij'';
-      ardwork = ''sudo chmod a+rw /dev/ttyACM0 && sudo chmod a+rw /dev/ttyUSB0'';
+      ardwork = ''sudo chmod a+rw /dev/ttyACM0; sudo chmod a+rw /dev/ttyUSB0'';
+      py = ''python'';
+      nrd = ''npm'';
+      battery = ''cat /sys/class/power_supply/BAT1/capacity'';
     };
 
     ohMyZsh = {
@@ -187,10 +193,19 @@
     pkgs.nh
 
     inputs.uncpkgs.microsoft-edge
-    # inputs.zen-browser.packages.x86_64-linux.twilight
-    # inputs.zen-browser.packages.x86_64-linux.default
-    # pkgs.neovim
+
+    inputs.zen-browser.packages.x86_64-linux.twilight
+    # inputs.zen-browser.packages.x86_64-linux.twilight.override
+    # {
+    #   policies = {
+    #     DisableAppUpdate = true;
+    #     DisableTelemetry = true;
+    #     # more and more
+    #   };
+    # }
+
     pkgs.ripgrep
+    pkgs.fd
     pkgs.zsh-powerlevel10k
     # pkgs.zsh-nix-shell
     pkgs.lshw
@@ -213,7 +228,6 @@
     pkgs.gnome-multi-writer
 
     pkgs.neofetch
-    # pkgs.neovim
     pkgs.gitFull
     pkgs.gh
     # pkgs.arduino
@@ -232,21 +246,23 @@
     pkgs.libgccjit
     pkgs.llvmPackages_latest.llvm
     pkgs.binutils_nogold
-    pkgs.zulu8
-    pkgs.zulu11
-    pkgs.zulu17
-    pkgs.zulu
+    # pkgs.zulu8
+    # pkgs.zulu11
+    # pkgs.zulu17
+    # pkgs.zulu
     pkgs.powershell
-    pkgs.jetbrains.webstorm
+    # pkgs.jetbrains.webstorm
     pkgs.jetbrains.idea-ultimate
     pkgs.jetbrains.jdk
+    pkgs.jdk
     pkgs.greenfoot
     # vvv dotnet sdk 7.0.410 is insecure vvv
     # pkgs.jetbrains.rider
-    pkgs.jetbrains.rust-rover
-    pkgs.jetbrains.clion
+    # pkgs.jetbrains.rust-rover
+    # pkgs.jetbrains.clion
     pkgs.maven
     pkgs.nodejs_22
+    pkgs.tailwindcss
     # pkgs.mysql84
     # pkgs.mysql-workbench
     pkgs.android-studio
@@ -258,7 +274,7 @@
     pkgs.gradle
     pkgs.jupyter-all
     pkgs.kotlin
-    pkgs.kicad
+    # pkgs.kicad
     pkgs.ngspice
     pkgs.logisim-evolution
     pkgs.gnumake
@@ -308,12 +324,16 @@
 
     pkgs.weechat
 
+    pkgs.warp-terminal
+
+    pkgs.processing
+
     # general tso's chicken
     pkgs.bat
     pkgs.eza
     pkgs.ncspot
 
-    pkgs.rustc
+    # pkgs.rustc
     pkgs.cargo
     pkgs.rustfmt
     pkgs.rustup
@@ -321,14 +341,15 @@
     pkgs.wasm-pack
     pkgs.cargo-generate
     pkgs.openssl
+    pkgs.wasm-bindgen-cli
 
     pkgs.trunk
-    pkgs.dioxus-cli
-    pkgs.cargo-tauri
+    # pkgs.dioxus-cli
+    # pkgs.cargo-tauri
+
+    pkgs.surrealdb
 
     # esp32 + rust
-    pkgs.ldproxy
-    pkgs.espup
     pkgs.git
     pkgs.wget
     pkgs.gnumake
@@ -347,12 +368,73 @@
 
     pkgs.gcc-arm-embedded # 13 is broken
     pkgs.unixtools.xxd
+
+    pkgs.rust-analyzer
+    pkgs.typescript
+    pkgs.lolcat
+    pkgs.nixpkgs-fmt
+
+    pkgs.go
+    pkgs.cargo-3ds
+
+    (pkgs.writeShellScriptBin "stats" ''
+      power="$(cat /sys/class/power_supply/BAT1/capacity)% ($(powerprofilesctl get) mode)"
+      
+      timestamp="$(date | awk '{for(i=1;i<=NF-2;i++) printf "%s ", $i}')"
+      
+      net_state="$(nmcli general status | awk 'NR==2 {print $1}')"
+      
+      net_name="$(nmcli connection show | rg 'wlp2s0' | awk '{for(i=1;i<=NF-3;i++) printf "%s ", $i}' | xargs)" # connection name (bad, i know)
+     
+      audio="$(pulsemixer --get-volume | awk '{print $1}')%"
+      if [ "$(pulsemixer --get-mute)" -eq 1 ]; then
+          audio="$audio (muted)"
+      fi
+
+      output="$timestamp | $net_state to $net_name | $audio | $power"
+
+      # term_width=$(tput cols)
+      # output_len=$(expr length "$output")
+      # padding=$(( (term_width - output_len) / 2 ))
+      # printf "%*s\n" $((padding + output_len)) "$output"
+
+      echo "$output"
+    '')
+    (pkgs.writeShellScriptBin "wp" ''
+      dir=$HOME/Pictures/Wallpapers/mgs
+      current=$(hyprctl hyprpaper listloaded | head -n1)
+      list=$(find "$dir" -type f | sort)
+      next=
+      first=
+      found=0
+      while IFS= read -r f; do
+        [ -z "$first" ] && first=$f
+        if [ "$found" = 1 ]; then
+          next=$f
+          break
+        fi
+        [ "$f" = "$current" ] && found=1
+      done <<EOF
+      $list
+      EOF
+      [ -z "$next" ] && next=$first
+      hyprctl hyprpaper reload ,"$next"
+    '')
   ];
   programs.nix-ld.enable = true;
 
   programs.java = {
     enable = true;
-    package = pkgs.zulu;
+    # package = pkgs.temurin-jre-bin-24;
+    package = pkgs.zulu24;
+    # package = pkgs.oraclejre8;
+  };
+
+  programs.direnv = {
+    enable = true;
+    settings = {
+      hide_env_diff = true;
+    };
   };
 
   hardware.keyboard.qmk.enable = true;
@@ -418,12 +500,14 @@
     WLR_NO_HARDWARE_CURSORS = "1";
     # tell discord and such (electron apps) to use wayland
     NIXOS_OZONE_WL = "1";
-    FLAKE = "/etc/nixos/";
+    NH_FLAKE = "/etc/nixos/";
     NIXPKGS_ALLOW_INSECURE = "1";
     HSA_OVERRIDE_GFX_VERSION = "11.0.0";
+    GSETTINGS_SCHEMA_DIR = "${pkgs.gtk3}/share/gsettings-schemas/${pkgs.gtk3.name}/glib-2.0/schemas";
     # GDK_BACKEND = "x11"; # NEVER USE THIS WITH HYPRLAND
     LIBCLANG_PATH = "/home/saltcal/.rustup/toolchains/esp/xtensa-esp32-elf-clang/esp-18.1.2_20240912/esp-clang/lib";
-    PATH = "/home/saltcal/Code/Personal/rust/projects/weather/target/release:/home/saltcal/.cargo/bin:/home/saltcal/Code/Personal/rust/projects/prostrate_man/target/release:/home/saltcal/.rustup/toolchains/esp/xtensa-esp-elf/esp-14.2.0_20240906/xtensa-esp-elf/bin:$PATH";
+    # JAVA_HOME = "${pkgs.temurin-bin-24}";
+    PATH = "/home/saltcal/Code/Personal/rust/projects/vanilla/dice/target/release:/home/saltcal/Code/Personal/rust/projects/vanilla/weather/target/release:/home/saltcal/.cargo/bin:/home/saltcal/Code/Personal/rust/projects/vanilla/prostrate_man/target/release:/home/saltcal/.rustup/toolchains/esp/xtensa-esp-elf/esp-14.2.0_20240906/xtensa-esp-elf/bin:$JAVA_HOME/bin:$PATH";
     PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
     ROCKET_CODEGEN_DEBUG = "1";
   };
@@ -434,7 +518,7 @@
   hardware.bluetooth.enable = true; # enables support for Bluetooth
   hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
 
-  hardware.pulseaudio = {
+  services.pulseaudio = {
     enable = false;
     #   support32Bit = true;
   };
@@ -461,13 +545,22 @@
     #jack.enable = true;
   };
 
+  # BREAKS EVERYTHING
+  # services.udev.extraRules = ''
+  #   SUBSYSTEM == "usb",
+  #   DRIVERS=="usb", ATTRS
+  #   { idVendor }=="32ac", ATTRS{idProduct}=="0012", ATTR{power/wakeup}="disabled", ATTR{driver/1-1.1.1.4/power/wakeup}="disabled"
+  #   SUBSYSTEM=="usb", DRIVERS=="usb", ATTRS{idVendor}=="32ac", ATTRS{idProduct}=="0014", ATTR{power/wakeup}="disabled", ATTR{driver/1-1.1.1.4/power/wakeup}="disabled"
+  # '';
+  services.power-profiles-daemon.enable = true;
+
   fonts.enableDefaultPackages = true;
   fonts.packages = with pkgs; [
     fira-code
     fira-code-symbols
     font-awesome
     nerd-fonts.jetbrains-mono
-    nerd-fonts.caskaydia-mono
+    nerd-fonts.caskaydia-cove
     # nerdfonts
     # # (nerdfonts.override { fonts = [
     # #     "JetBrainsMono"
@@ -485,3 +578,7 @@
   system.stateVersion = "24.11"; # Did you read the comment?
   boot.kernelPackages = pkgs.linuxPackages_latest;
 }
+
+
+
+

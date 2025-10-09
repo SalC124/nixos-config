@@ -63,7 +63,7 @@
         pyright.enable = true;
         kotlin_language_server.enable = true;
         jsonls.enable = true;
-        # haskell-language-server.enable = true; WHAT THE FUCK
+        # haskell-language-server.enable = true; WHAT THE FRICK
       };
     };
 

@@ -9,47 +9,47 @@
     eula = true;
 
     dataDir = "/home/saltcal/minecraft-servers";
- 
+
     servers = {
       one-block = {
         enable = true;
         package = inputs.pkgs-unstable.fabricServers.fabric-1_21_4.override { loaderVersion = "0.16.9"; };
         autostart = false;
         enableReload = true;
- 
+
         serverProperties = {
-          accepts-transfers=false;
-          allow-flight=true;
-          allow-nether=true;
-          broadcast-console-to-ops=false;
-          broadcast-rcon-to-ops=false;
-          difficulty="normal";
-          enable-command-block=true;
-          enforce-whitelist=false;
-          function-permission-level=2;
-          gamemode="survival";
-          generate-structures=false;
-          initial-enabled-packs="vanilla";
-          level-name="world";
-          log-ips=true;
-          max-chained-neighbor-updates=1000000;
-          motd="\u00A7k1";
-          network-compression-threshold=256;
-          online-mode=true;
-          op-permission-level=2;
-          pause-when-empty-seconds=60;
-          player-idle-timeout=0;
-          prevent-proxy-connections=false;
-          pvp=true;
-          server-ip="192.168.1.54";
-          server-port=25565;
-          simulation-distance=16;
-          spawn-monsters=true;
-          view-distance=10;
-          white-list=false;
+          accepts-transfers = false;
+          allow-flight = true;
+          allow-nether = true;
+          broadcast-console-to-ops = false;
+          broadcast-rcon-to-ops = false;
+          difficulty = "normal";
+          enable-command-block = true;
+          enforce-whitelist = false;
+          function-permission-level = 2;
+          gamemode = "survival";
+          generate-structures = false;
+          initial-enabled-packs = "vanilla";
+          level-name = "world";
+          log-ips = true;
+          max-chained-neighbor-updates = 1000000;
+          motd = "\u00A7k1";
+          network-compression-threshold = 256;
+          online-mode = true;
+          op-permission-level = 2;
+          pause-when-empty-seconds = 60;
+          player-idle-timeout = 0;
+          prevent-proxy-connections = false;
+          pvp = true;
+          server-ip = "192.168.1.54";
+          server-port = 25565;
+          simulation-distance = 16;
+          spawn-monsters = true;
+          view-distance = 10;
+          white-list = false;
         };
         # whitelist = {};
- 
+
         # symlinks = {
         #   "mods" = pkgs.linkFarmFromDrvs "mods" (builtins.attrValues {
         #     Starlight = fetchurl { url = "https://cdn.modrinth.com/data/H8CaAYZC/versions/XGIsoVGT/starlight-1.1.2%2Bfabric.dbc156f.jar"; sha512 = "6b0e363fc2d6cd2f73b466ab9ba4f16582bb079b8449b7f3ed6e11aa365734af66a9735a7203cf90f8bc9b24e7ce6409eb04d20f84e04c7c6b8e34f4cc8578bb"; };
