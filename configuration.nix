@@ -25,6 +25,14 @@
     ./hacking/intermediary.nix
     # ./nxtvim
     # ./wine.nix
+    # ./pkgs/zed-custom.nix
+    # ./pkgs/zigger.nix
+
+    ./passthrough-fr-this-time.nix
+    ./kvm-setup.nix
+
+    # ./vfio-passthrough.nix
+    # ./vfio-vm.nix
   ];
 
   nix.settings = {
@@ -102,6 +110,7 @@
       "networkmanager"
       "wheel"
       "adbusers"
+      "dialout"
     ];
     # packages = with pkgs; [];
   };
@@ -160,6 +169,7 @@
       yz = "yazi";
       kill-zj = ''zellij kill-all-sessions -y || echo "why dont you read with your eyes?" && zellij delete-all-sessions -y'';
       nv = ''vi ./'';
+      zi = ''zeditor'';
       envy = ''vi ./'';
       rpi-ws-fs = ''sudo sshfs -o allow_other,default_permissions saltcal@67.84.35.204:/ /media/rp-sd && cd /media/rp-sd/'';
       rpi-ws-ssh = ''kitten ssh saltcal@67.84.35.204'';
@@ -182,19 +192,19 @@
   xdg.mime.defaultApplications = {
     "text/html" = "microsoft-edge.desktop";
   };
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.allowUnfreePredicate = nixpkgs-: true;
   # nixpkgs.config.nvidia.acceptLicense = true;p
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
+  nixpkgs.config.allowUnfreePredicate = nixpkgs-: true;
   environment.systemPackages = [
+    pkgs.man-pages
     pkgs.nh
 
     inputs.uncpkgs.microsoft-edge
 
     inputs.zen-browser.packages.x86_64-linux.twilight
+    pkgs.firefox
     # inputs.zen-browser.packages.x86_64-linux.twilight.override
     # {
     #   policies = {
@@ -334,42 +344,42 @@
     pkgs.ncspot
 
     # pkgs.rustc
-    pkgs.cargo
-    pkgs.rustfmt
-    pkgs.rustup
-    pkgs.gccgo14
-    pkgs.wasm-pack
-    pkgs.cargo-generate
-    pkgs.openssl
-    pkgs.wasm-bindgen-cli
-
-    pkgs.trunk
+    # pkgs.cargo
+    # pkgs.rustfmt
+    # pkgs.rustup
+    # pkgs.gccgo14
+    # pkgs.wasm-pack
+    # pkgs.cargo-generate
+    # pkgs.openssl
+    # pkgs.wasm-bindgen-cli
+    #
+    # pkgs.trunk
     # pkgs.dioxus-cli
     # pkgs.cargo-tauri
 
     pkgs.surrealdb
 
     # esp32 + rust
-    pkgs.git
-    pkgs.wget
-    pkgs.gnumake
-    pkgs.flex
-    pkgs.bison
-    pkgs.gperf
-    pkgs.pkg-config
-    pkgs.cmake
-    pkgs.ncurses5
-    pkgs.ninja
-    (pkgs.python3.withPackages (p: with p; [
-      pip
-      virtualenv
-    ]))
-    pkgs.espflash
+    # pkgs.git
+    # pkgs.wget
+    # pkgs.gnumake
+    # pkgs.flex
+    # pkgs.bison
+    # pkgs.gperf
+    # pkgs.pkg-config
+    # pkgs.cmake
+    # pkgs.ncurses5
+    # pkgs.ninja
+    # (pkgs.python3.withPackages (p: with p; [
+    #   pip
+    #   virtualenv
+    # ]))
+    # pkgs.espflash
 
     pkgs.gcc-arm-embedded # 13 is broken
     pkgs.unixtools.xxd
 
-    pkgs.rust-analyzer
+    # pkgs.rust-analyzer
     pkgs.typescript
     pkgs.lolcat
     pkgs.nixpkgs-fmt
@@ -379,13 +389,13 @@
 
     (pkgs.writeShellScriptBin "stats" ''
       power="$(cat /sys/class/power_supply/BAT1/capacity)% ($(powerprofilesctl get) mode)"
-      
+
       timestamp="$(date | awk '{for(i=1;i<=NF-2;i++) printf "%s ", $i}')"
-      
+
       net_state="$(nmcli general status | awk 'NR==2 {print $1}')"
-      
+
       net_name="$(nmcli connection show | rg 'wlp2s0' | awk '{for(i=1;i<=NF-3;i++) printf "%s ", $i}' | xargs)" # connection name (bad, i know)
-     
+
       audio="$(pulsemixer --get-volume | awk '{print $1}')%"
       if [ "$(pulsemixer --get-mute)" -eq 1 ]; then
           audio="$audio (muted)"
@@ -420,6 +430,50 @@
       [ -z "$next" ] && next=$first
       hyprctl hyprpaper reload ,"$next"
     '')
+
+    # inputs.nixpkgs-unstable.zed-editor
+    #inputs.zed-editor.packages.${pkgs.system}.default
+    # inputs.nixpkgs-unstable.zed-editor-fhs
+    # pkgs.zed-editor-fhs
+    # ((import ./pkgs/zed-editor.nix { inherit pkgs; }).fhs.overrideAttrs (old: {
+    #   # Rename the executable so it replaces the plain one
+    #   installPhase = ''
+    #     runHook preInstall
+    #     cp -r ${old.out}/* $out/
+    #     ln -sf $out/libexec/zed-editor $out/bin/zeditor
+    #     runHook postInstall
+    #   '';
+    # }))
+    # pkgs.zed-editor-fhs
+    #(inputs.nixpkgs-unstable.zed-editor.fhsWithPackages
+    #  (pkgs: [
+    #    # rustup
+    #    inputs.nixpkgs-unstable.cargo
+    #    inputs.nixpkgs-unstable.rustc
+    #    inputs.nixpkgs-unstable.rust-analyzer
+    #  ]))
+    # (pkgs.zed-editor.fhsWithPackages
+    #   (pkgs: with pkgs; [
+    #     rustup
+    #     cargo
+    #     rustc
+    #     rust-analyzer
+    #   ]))
+
+    #(pkgs.callPackage ./pkgs/zed-editor/package.nix { })
+    (pkgs.callPackage ./pkgs-unstable/zed-editor-fhs/package.nix {
+      rustPlatform = pkgs.makeRustPlatform {
+        cargo = inputs.nixpkgs-unstable.cargo;
+        rustc = inputs.nixpkgs-unstable.rustc;
+      };
+      stdenv = inputs.nixpkgs-unstable.stdenv;
+
+    })
+
+    # pkgs.nixd
+    # pkgs.nil
+
+    pkgs.croc
   ];
   programs.nix-ld.enable = true;
 
@@ -436,6 +490,7 @@
       hide_env_diff = true;
     };
   };
+  services.gnome.gnome-keyring.enable = true;
 
   hardware.keyboard.qmk.enable = true;
 
@@ -510,6 +565,7 @@
     PATH = "/home/saltcal/Code/Personal/rust/projects/vanilla/dice/target/release:/home/saltcal/Code/Personal/rust/projects/vanilla/weather/target/release:/home/saltcal/.cargo/bin:/home/saltcal/Code/Personal/rust/projects/vanilla/prostrate_man/target/release:/home/saltcal/.rustup/toolchains/esp/xtensa-esp-elf/esp-14.2.0_20240906/xtensa-esp-elf/bin:$JAVA_HOME/bin:$PATH";
     PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
     ROCKET_CODEGEN_DEBUG = "1";
+    DEVSHELL_PATH = "/home/saltcal/Code/devshells";
   };
 
   xdg.portal.enable = true;
@@ -556,11 +612,13 @@
 
   fonts.enableDefaultPackages = true;
   fonts.packages = with pkgs; [
-    fira-code
-    fira-code-symbols
+    # fira-code
+    # fira-code-symbols
     font-awesome
     nerd-fonts.jetbrains-mono
     nerd-fonts.caskaydia-cove
+    nerd-fonts.fira-code
+    cascadia-code
     # nerdfonts
     # # (nerdfonts.override { fonts = [
     # #     "JetBrainsMono"
@@ -578,7 +636,3 @@
   system.stateVersion = "24.11"; # Did you read the comment?
   boot.kernelPackages = pkgs.linuxPackages_latest;
 }
-
-
-
-

@@ -22,6 +22,8 @@
     # MESA_GL_VERSION_OVERRIDE = "3.0";
   };
 
+  programs.corectrl.enable = true;
+
   hardware.opengl.driSupport32Bit = true; # For 32 bit applications
 
   hardware.graphics.enable32Bit = true; # For 32 bit applications
