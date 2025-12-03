@@ -6,13 +6,13 @@
 }:
 
 {
-  services.xserver.displayManager.gdm = {
+  services.displayManager.gdm = {
     enable = true;
     wayland = true;
   };
   services.displayManager.defaultSession = "hyprland";
-  services.logind.lidSwitch = "ignore";
-  services.logind.powerKey = "suspend";
+  services.logind.settings.Login.HandleLidSwitch = "ignore";
+  services.logind.settings.Login.HandlePowerKey = "suspend";
 
   programs.hyprland = {
     enable = true;

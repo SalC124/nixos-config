@@ -13,7 +13,7 @@
     # pkgs.looking-glass-client
     pkgs.obs-studio
     pkgs.gnome-sudoku
-    pkgs.protonup
+    pkgs.protonup-ng
     pkgs.r2modman
     pkgs.dolphin-emu
     pkgs.lutris

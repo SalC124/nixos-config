@@ -10,9 +10,9 @@
     "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
   ];
 
-  hardware.opengl.extraPackages = with pkgs; [
+  hardware.graphics.extraPackages = with pkgs; [
     rocmPackages.clr.icd
-    amdvlk
+    # amdvlk # deprecated. radv enabled by default
   ];
   environment.systemPackages = with pkgs; [
     clinfo
@@ -24,13 +24,11 @@
 
   programs.corectrl.enable = true;
 
-  hardware.opengl.driSupport32Bit = true; # For 32 bit applications
-
   hardware.graphics.enable32Bit = true; # For 32 bit applications
 
   # For 32 bit applications 
   hardware.graphics.extraPackages32 = with pkgs; [
-    driversi686Linux.amdvlk
+    # driversi686Linux.amdvlk # depr-d.
   ];
 
   systemd.packages = with pkgs; [ lact ];

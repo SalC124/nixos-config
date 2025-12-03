@@ -8,31 +8,15 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    # ./guh-nome.nix
     ./Hyprland.nix
-    # ./vm.nix
-    # ./guac.nix
     ./extraneous-pkgs.nix
     ./amd.nix
-    # ./style.nix
     ./syncthing.nix
-    # ./nixvim/nixvim.nix
-    # ./minecraft-server.nix
-    # ./nvf/nvf-config.nix
-    # ./vm-passthrough.nix # DONT USE
-    # ./virtual-machine.nix
     ./speaking-of-guacamole/guac.nix
     ./hacking/intermediary.nix
-    # ./nxtvim
-    # ./wine.nix
-    # ./pkgs/zed-custom.nix
-    # ./pkgs/zigger.nix
+    # ./passthrough-fr-this-time.nix
+    # ./kvm-setup.nix
 
-    ./passthrough-fr-this-time.nix
-    ./kvm-setup.nix
-
-    # ./vfio-passthrough.nix
-    # ./vfio-vm.nix
   ];
 
   nix.settings = {
@@ -298,7 +282,7 @@
 
     pkgs.vesktop
     # pkgs.discord
-    pkgs.whatsapp-for-linux
+    pkgs.wasistlos
     pkgs.protonvpn-gui
     pkgs.syncthing
     pkgs.btop
@@ -313,7 +297,7 @@
     pkgs.spotify
     pkgs.spotifyd
 
-    pkgs.onlyoffice-bin_latest
+    pkgs.onlyoffice-desktopeditors
     pkgs.libreoffice
     pkgs.krita
     pkgs.gimp
@@ -479,9 +463,10 @@
 
   programs.java = {
     enable = true;
-    # package = pkgs.temurin-jre-bin-24;
-    package = pkgs.zulu24;
+    # package = pkgs.temurin-jre-bin-24; # depr-d
+    # package = pkgs.zulu24; # depr-d
     # package = pkgs.oraclejre8;
+    package = pkgs.zulu25;
   };
 
   programs.direnv = {
