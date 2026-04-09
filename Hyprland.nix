@@ -1,8 +1,9 @@
-{ config
-, pkgs
-, lib
-, inputs
-, ...
+{
+  config,
+  pkgs,
+  lib,
+  inputs,
+  ...
 }:
 
 {
@@ -14,6 +15,20 @@
   services.logind.settings.Login.HandleLidSwitch = "ignore";
   services.logind.settings.Login.HandlePowerKey = "suspend";
 
+  security.pam.services.hyprland = {
+    text = ''
+      auth       optional    pam_gnome_keyring.so
+      session    optional    pam_gnome_keyring.so auto_start
+    '';
+  };
+  security.pam.services."system-local-login".text = ''
+    auth       optional    pam_gnome_keyring.so
+    session    optional    pam_gnome_keyring.so auto_start
+  '';
+  security.pam.services."gdm-password".text = ''
+    auth       optional    pam_gnome_keyring.so
+    session    optional    pam_gnome_keyring.so auto_start
+  '';
   programs.hyprland = {
     enable = true;
     # # set the flake package
@@ -70,9 +85,11 @@
     pkgs.playerctl
     pkgs.brightnessctl
     pkgs.pulsemixer
-    pkgs.catppuccin-cursors.frappeDark
+    pkgs.catppuccin-cursors.mochaDark
     pkgs.nwg-look
     pkgs.dconf-editor
     pkgs.banana-cursor
+    pkgs.bibata-cursors
+    pkgs.tesseract
   ];
 }

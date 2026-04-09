@@ -1,5 +1,4 @@
 { config, pkgs, lib, ... }:
-
 {
   config = lib.mkIf config.vfio.enable {
     # Enable virtualization
@@ -22,13 +21,30 @@
     # Enable virt-manager for GUI VM management
     programs.virt-manager.enable = true;
 
-    # Looking Glass setup
+    # Looking Glass setup with KVMFR
     systemd.tmpfiles.rules = [
-      # Create shared memory file for Looking Glass (128MB for 4K, adjust if needed)
-      "f /dev/shm/looking-glass 0660 saltcal kvm -"
       # Create shared folder for VM
       "d /home/saltcal/VMShared 0755 saltcal users -"
     ];
+
+    # Load KVMFR kernel module
+    boot.extraModulePackages = [ config.boot.kernelPackages.kvmfr ];
+    boot.kernelModules = [ "kvmfr" ];
+
+    # Create modprobe config file for KVMFR
+    environment.etc."modprobe.d/kvmfr.conf".text = ''
+      options kvmfr static_size_mb=64
+    '';
+
+    boot.extraModprobeConfig = ''
+      # Enable nested virtualization (optional)
+      options kvm_amd nested=1
+    '';
+
+    # Ensure KVMFR device is created with correct permissions
+    services.udev.extraRules = ''
+      SUBSYSTEM=="kvmfr", OWNER="saltcal", GROUP="kvm", MODE="0660"
+    '';
 
     # Symlink virtio-win drivers into shared folder for easy Windows access
     system.activationScripts.virtioWinLink = ''
@@ -43,6 +59,7 @@
       virt-manager
       virtio-win # Windows virtio drivers
       spice-gtk # For SPICE tools
+      virtiofsd
     ];
 
     # Make virtio-win drivers easily accessible
@@ -55,10 +72,5 @@
       "hugepagesz=1G"
       "hugepages=16" # Reserve 16GB of hugepages for better VM performance
     ];
-
-    # Enable nested virtualization (optional, useful for testing)
-    boot.extraModprobeConfig = ''
-      options kvm_amd nested=1
-    '';
   };
 }

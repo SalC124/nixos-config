@@ -1,10 +1,12 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{ pkgs
-, inputs
-, ...
-}: {
+{
+  pkgs,
+  inputs,
+  ...
+}:
+{
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -117,7 +119,7 @@
         defaultBranch = "main";
       };
       safe.directory = "*";
-
+      lfs.enable = true;
     };
   };
 
@@ -162,6 +164,7 @@
       py = ''python'';
       nrd = ''npm'';
       battery = ''cat /sys/class/power_supply/BAT1/capacity'';
+      v = ''vi ./'';
     };
 
     ohMyZsh = {
@@ -246,7 +249,7 @@
     # pkgs.zulu
     pkgs.powershell
     # pkgs.jetbrains.webstorm
-    pkgs.jetbrains.idea-ultimate
+    pkgs.jetbrains.idea
     pkgs.jetbrains.jdk
     pkgs.jdk
     pkgs.greenfoot
@@ -445,19 +448,33 @@
     #   ]))
 
     #(pkgs.callPackage ./pkgs/zed-editor/package.nix { })
-    (pkgs.callPackage ./pkgs-unstable/zed-editor-fhs/package.nix {
-      rustPlatform = pkgs.makeRustPlatform {
-        cargo = inputs.nixpkgs-unstable.cargo;
-        rustc = inputs.nixpkgs-unstable.rustc;
-      };
-      stdenv = inputs.nixpkgs-unstable.stdenv;
 
-    })
 
-    # pkgs.nixd
-    # pkgs.nil
+    # prev best
+    # (pkgs.callPackage ./pkgs-unstable/zed-editor-fhs/package.nix {
+    #   rustPlatform = pkgs.makeRustPlatform {
+    #     cargo = inputs.nixpkgs-unstable.cargo;
+    #     rustc = inputs.nixpkgs-unstable.rustc;
+    #   };
+    #   stdenv = inputs.nixpkgs-unstable.stdenv;
+    #
+    # })
+    inputs.zed-editor.packages.x86_64-linux.default
+
+    pkgs.nixd
+    pkgs.nil
 
     pkgs.croc
+
+    pkgs.digital
+
+    pkgs.gemini-cli
+
+    pkgs.seahorse
+
+    pkgs.ltspice
+
+    pkgs.kicad
   ];
   programs.nix-ld.enable = true;
 
@@ -524,6 +541,7 @@
   # networking.firewall.allowedUDPPorts = [ 8080 ];
   # Or disable the firewall altogether.
   networking.firewall.enable = false;
+  networking.firewall.checkReversePath = false;
 
   services.ratbagd.enable = true;
 
@@ -540,7 +558,8 @@
     WLR_NO_HARDWARE_CURSORS = "1";
     # tell discord and such (electron apps) to use wayland
     NIXOS_OZONE_WL = "1";
-    NH_FLAKE = "/etc/nixos/";
+    NH_OS_FLAKE = "/etc/nixos/";
+    NH_HOME_FLAKE = "/home/saltcal/.config/home-manager";
     NIXPKGS_ALLOW_INSECURE = "1";
     HSA_OVERRIDE_GFX_VERSION = "11.0.0";
     GSETTINGS_SCHEMA_DIR = "${pkgs.gtk3}/share/gsettings-schemas/${pkgs.gtk3.name}/glib-2.0/schemas";

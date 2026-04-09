@@ -1,6 +1,7 @@
 { lib
 , config
 , pkgs
+, inputs
 , ...
 }:
 
@@ -8,7 +9,8 @@
 {
   environment.systemPackages = [
 
-    pkgs.godot_4
+    # inputs.nixpkgs-unstable.godot
+    (pkgs.callPackage ./pkgs-unstable/godot4_6/package.nix { })
     pkgs.pixelorama
     # pkgs.looking-glass-client
     pkgs.obs-studio
@@ -24,6 +26,7 @@
 
     # pkgs.retroarch-full
     # pkgs.retroarch-assets
+    pkgs.mangohud
   ];
 
   environment.sessionVariables = {

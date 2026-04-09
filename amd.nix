@@ -1,4 +1,4 @@
-{ lib, config, pkgs, ... }:
+{ lib, config, pkgs, inputs, ... }:
 
 {
   # Enable amd things
@@ -22,7 +22,11 @@
     # MESA_GL_VERSION_OVERRIDE = "3.0";
   };
 
-  programs.corectrl.enable = true;
+  programs.corectrl = {
+    enable = true;
+    package = pkgs.corectrl;
+  };
+  users.users.saltcal.extraGroups = [ "corectrl" ];
 
   hardware.graphics.enable32Bit = true; # For 32 bit applications
 

@@ -12,7 +12,7 @@
     };
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
-    zed-editor.url = "github:zed-industries/zed";
+    zed-editor.url = "github:zed-industries/zed/v0.225.10";
     # nixos-vfio.url = "github:j-brn/nixos-vfio";
   };
 
@@ -26,8 +26,8 @@
     , # stylix,
       # solaar,
       nixvim
-    , # nix-minecraft,
-      zed-editor
+    # , nix-minecraft
+    , zed-editor
     # , nixos-vfio
     , ...
     } @ inputs:

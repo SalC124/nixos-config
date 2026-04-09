@@ -7,12 +7,12 @@
     wayvnc
   ];
   services.guacamole-server = {
-    enable = true;
+    enable = false;
     host = "127.0.0.1";
   };
 
   services.guacamole-client = {
-    enable = true;
+    enable = false;
     userMappingXml = ./user-mapping.xml;
     enableWebserver = true;
     settings = {
