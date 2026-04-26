@@ -27,6 +27,10 @@
     # pkgs.retroarch-full
     # pkgs.retroarch-assets
     pkgs.mangohud
+    pkgs.chiaki-ng
+
+    pkgs.lmms
+    pkgs.surge-XT
   ];
 
   environment.sessionVariables = {

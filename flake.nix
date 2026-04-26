@@ -12,7 +12,7 @@
     };
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
-    zed-editor.url = "github:zed-industries/zed/v0.225.10";
+    zed-editor.url = "github:zed-industries/zed/fe26ab68094bc731e0d51a8ad94cb00ad6513b5b";
     # nixos-vfio.url = "github:j-brn/nixos-vfio";
   };
 
