@@ -10,6 +10,12 @@
     wl-clipboard
     libnotify
   ];
+  environment.sessionVariables = {
+    # if cursor no existo
+    WLR_NO_HARDWARE_CURSORS = "1";
+    # tell discord and such (electron apps) to use wayland
+    NIXOS_OZONE_WL = "1";
+  };
 
   services.gnome.gnome-keyring.enable = true;
 
@@ -20,12 +26,5 @@
       grim
       slurp
     ];
-
-    home.sessionVariables = {
-      # if cursor no existo
-      WLR_NO_HARDWARE_CURSORS = "1";
-      # tell discord and such (electron apps) to use wayland
-      NIXOS_OZONE_WL = "1";
-    };
   };
 }

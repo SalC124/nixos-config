@@ -155,7 +155,7 @@
   # TODO fix
   environment.sessionVariables = {
     NH_OS_FLAKE = "/etc/nixos/";
-    NH_HOME_FLAKE = "/home/${username}/.config/home-manager";
+    # NH_HOME_FLAKE = "/home/${username}/.config/home-manager";
     DEVSHELL_PATH = "/home/${username}/Code/devshells";
   };
 }
