@@ -7,7 +7,7 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
-    zed-editor.url = "github:zed-industries/zed/fe26ab68094bc731e0d51a8ad94cb00ad6513b5b";
+    zed-editor.url = "github:zed-industries/zed/5ec84a926ef83865afb92d2a3d1ca3b419572cf9";
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
