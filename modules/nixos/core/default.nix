@@ -138,8 +138,6 @@
 
     pkgs.lolcat
 
-    inputs.zed-editor.packages.x86_64-linux.default
-
     pkgs.nixd
     pkgs.nil
     pkgs.alejandra

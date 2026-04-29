@@ -41,7 +41,7 @@
           config.allowUnfree = true;
         };
       };
-      allThemes = import ./themes.nix { activeTheme = theme; };
+      allThemes = import ./data/themes.nix { activeTheme = theme; };
       activeTheme = allThemes.themes.${theme};
       mkHost =
         hostName: modules:
@@ -58,6 +58,7 @@
               ./hosts/${hostName}/hardware-configuration.nix
               { networking.hostName = hostName; }
               ./modules/nixos/core/default.nix
+              ./modules/nixos/features/zed.nix
               inputs.home-manager.nixosModules.home-manager
               {
                 home-manager.useGlobalPkgs = true;
