@@ -6,7 +6,7 @@
 }:
 {
   home-manager.users.${username} =
-    { config, ... }:
+    { ... }:
     {
       home.packages = [ pkgs.hyprpaper ];
       home.file.".config/hypr/hyprpaper.conf" = {

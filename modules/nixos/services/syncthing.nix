@@ -1,4 +1,4 @@
-{ lib, config, pkgs, inputs, username, ... }:
+{ ... }:
 
 {
   services = {
@@ -11,7 +11,9 @@
       overrideFolders = true; # overrides any folders added or deleted through the WebUI
       settings = {
         devices = {
-          "beta-compooper" = { id = "DE7IZBL-KEWK2SK-2Z7Y66J-GCMVMMA-K6VNK5W-4WKXAVA-WS7ORNF-5OK36QV"; };
+          "beta-compooper" = {
+            id = "DE7IZBL-KEWK2SK-2Z7Y66J-GCMVMMA-K6VNK5W-4WKXAVA-WS7ORNF-5OK36QV";
+          };
         };
         folders = {
           "Personal Vault" = {

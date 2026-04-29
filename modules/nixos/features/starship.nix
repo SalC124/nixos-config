@@ -1,6 +1,5 @@
 {
   activeTheme,
-  pkgs,
   username,
   ...
 }:

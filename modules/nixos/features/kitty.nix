@@ -1,7 +1,5 @@
 {
   activeTheme,
-  lib,
-  config,
   pkgs,
   username,
   ...

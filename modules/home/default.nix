@@ -11,5 +11,4 @@
   _module.args = { inherit activeTheme; };
 
   programs.home-manager.enable = true;
-
 }

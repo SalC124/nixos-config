@@ -142,6 +142,7 @@
 
     pkgs.nixd
     pkgs.nil
+    pkgs.alejandra
   ];
   programs.nix-ld.enable = true;
 

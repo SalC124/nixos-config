@@ -17,7 +17,6 @@
         }
       '';
       configurationLimit = 36;
-      # theme = "${pkgs.libsForQt5.breeze-grub}/grub/themes/breeze";
     };
     timeout = null;
   };

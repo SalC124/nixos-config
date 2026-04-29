@@ -1,4 +1,8 @@
-{ lib, config, pkgs, inputs, username, ... }:
+{
+  pkgs,
+  username,
+  ...
+}:
 
 {
   # Enable amd things

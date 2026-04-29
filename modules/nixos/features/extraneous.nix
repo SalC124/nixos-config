@@ -1,9 +1,7 @@
-{ lib
-, config
-, pkgs
-, inputs
-, username
-, ...
+{
+  pkgs,
+  username,
+  ...
 }:
 
 # lib.mkIf (config.specialisation != School )
