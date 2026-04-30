@@ -21,7 +21,6 @@
       zen-browser,
       uncpkgs,
       nixpkgs-unstable,
-      nixvim,
       zed-editor,
       ...
     }@inputs:
@@ -56,7 +55,6 @@
             ./hosts/${hostName}/hardware-configuration.nix
             { networking.hostName = hostName; }
             ./modules/nixos/core/default.nix
-            ./modules/nixos/features/zed.nix
             inputs.home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
@@ -78,6 +76,7 @@
           ./modules/nixos/core/boot-grub.nix
           ./modules/nixos/desktop/hyprland.nix
           ./modules/nixos/features/starship.nix
+          ./modules/nixos/features/zed.nix
           ./modules/nixos/features/extraneous.nix
           ./modules/nixos/services/syncthing.nix
         ];
