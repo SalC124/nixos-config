@@ -88,6 +88,7 @@
           ./modules/nixos/features/starship.nix
           ./modules/nixos/features/kitty.nix
           ./modules/nixos/features/fuzzel.nix
+          ./modules/nixos/features/waybar.nix
         ];
       };
     };

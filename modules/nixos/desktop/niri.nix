@@ -1,15 +1,11 @@
 {
   pkgs,
-  inputs,
   username,
   ...
 }:
 {
   imports = [
     ./common-wayland.nix
-    ../features/kitty.nix
-    ../features/waybar.nix
-    ../features/fuzzel.nix
   ];
 
   programs.niri.enable = true;
