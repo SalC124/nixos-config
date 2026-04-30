@@ -15,7 +15,6 @@
       rebuild = "cd /etc/nixos/ && nh os switch";
       hyprdir = "vi ~/.config/hypr/";
       ytdl = "yt-dlp -f bestvideo+bestaudio --embed-thumbnail --embed-metadata --embed-chapters --write-auto-subs --embed-subs -P '~/Videos/Youtube Downloads'";
-      cleanup = "nix-collect-garbage";
       nixdir = "cd /etc/nixos/ && sudo vi ./";
       vs = "cd ~/ && sudo code --no-sandbox --user-data-dir='.config/Code'";
       sysflk = "sudo vi /etc/nixos/flake.nix";
@@ -25,8 +24,6 @@
       nv = "vi ./";
       zi = "zeditor";
       envy = "vi ./";
-      rpi-ws-fs = "sudo sshfs -o allow_other,default_permissions saltcal@67.84.35.204:/ /media/rp-sd && cd /media/rp-sd/";
-      rpi-ws-ssh = "kitten ssh saltcal@67.84.35.204";
       zj = "zellij";
       ardwork = "sudo chmod a+rw /dev/ttyACM0; sudo chmod a+rw /dev/ttyUSB0";
     };
@@ -419,24 +416,6 @@
   #   { idVendor }=="32ac", ATTRS{idProduct}=="0012", ATTR{power/wakeup}="disabled", ATTR{driver/1-1.1.1.4/power/wakeup}="disabled"
   #   SUBSYSTEM=="usb", DRIVERS=="usb", ATTRS{idVendor}=="32ac", ATTRS{idProduct}=="0014", ATTR{power/wakeup}="disabled", ATTR{driver/1-1.1.1.4/power/wakeup}="disabled"
   # '';
-  services.power-profiles-daemon.enable = true;
-
-  fonts.enableDefaultPackages = true;
-  fonts.packages = with pkgs; [
-    # fira-code
-    # fira-code-symbols
-    font-awesome
-    nerd-fonts.jetbrains-mono
-    nerd-fonts.caskaydia-cove
-    nerd-fonts.fira-code
-    cascadia-code
-    # nerdfonts
-    # # (nerdfonts.override { fonts = [
-    # #     "JetBrainsMono"
-    # #   ];
-    # # })
-    # # JetBrainsMono
-  ];
 
   # For Southern Islands (SI i.e. GCN 1) cards
   boot.kernelParams = [

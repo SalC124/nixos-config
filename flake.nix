@@ -83,11 +83,8 @@
 
         gamma-compooper = mkHost "gamma-compooper" [
           ./modules/nixos/core/boot-systemd.nix
-          ./modules/nixos/desktop/niri.nix
+          ./modules/nixos/desktop/hyprland.nix
           ./modules/nixos/features/starship.nix
-          ./modules/nixos/features/kitty.nix
-          ./modules/nixos/features/fuzzel.nix
-          ./modules/nixos/features/waybar.nix
         ];
       };
     };

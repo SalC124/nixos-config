@@ -98,6 +98,9 @@
       update = "cd /etc/nixos/ && sudo nix flake update";
       ls = "lsd -A";
       py = "python";
+      cleanup = "nix-collect-garbage";
+      rpi-ws-fs = "sudo sshfs -o allow_other,default_permissions saltcal@67.84.35.204:/ /media/rp-sd && cd /media/rp-sd/";
+      rpi-ws-ssh = "kitten ssh saltcal@67.84.35.204";
     };
 
     ohMyZsh = {
@@ -157,4 +160,23 @@
     # NH_HOME_FLAKE = "/home/${username}/.config/home-manager";
     DEVSHELL_PATH = "/home/${username}/Code/devshells";
   };
+
+  services.power-profiles-daemon.enable = true;
+
+  fonts.enableDefaultPackages = true;
+  fonts.packages = with pkgs; [
+    # fira-code
+    # fira-code-symbols
+    font-awesome
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.caskaydia-cove
+    nerd-fonts.fira-code
+    cascadia-code
+    # nerdfonts
+    # # (nerdfonts.override { fonts = [
+    # #     "JetBrainsMono"
+    # #   ];
+    # # })
+    # # JetBrainsMono
+  ];
 }
