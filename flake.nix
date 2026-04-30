@@ -51,24 +51,22 @@
             inputs = extendedInputs;
             inherit username activeTheme;
           };
-          modules =
-            modules
-            ++ [
-              ./hosts/${hostName}
-              ./hosts/${hostName}/hardware-configuration.nix
-              { networking.hostName = hostName; }
-              ./modules/nixos/core/default.nix
-              ./modules/nixos/features/zed.nix
-              inputs.home-manager.nixosModules.home-manager
-              {
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
-                home-manager.extraSpecialArgs = { inherit inputs username activeTheme; };
-                home-manager.users.${username} = import ./modules/home/default.nix;
-                home-manager.backupFileExtension = "backup";
-              }
-            ]
-            ++ (if hostName == "gamma-compooper" then [ ./modules/nixos/services/remote-builder.nix ] else [ ]);
+          modules = modules ++ [
+            ./hosts/${hostName}
+            ./hosts/${hostName}/hardware-configuration.nix
+            { networking.hostName = hostName; }
+            ./modules/nixos/core/default.nix
+            ./modules/nixos/features/zed.nix
+            inputs.home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = { inherit inputs username activeTheme; };
+              home-manager.users.${username} = import ./modules/home/default.nix;
+              home-manager.backupFileExtension = "backup";
+            }
+          ];
+          # ++ (if hostName == "gamma-compooper" then [ ./modules/nixos/services/remote-builder.nix ] else [ ]);
         };
     in
     {

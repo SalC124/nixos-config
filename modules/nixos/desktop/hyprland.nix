@@ -20,10 +20,6 @@ in
     ../features/hyprpaper.nix
   ];
 
-  services.displayManager.gdm = {
-    enable = true;
-    wayland = true;
-  };
   services.displayManager.defaultSession = "hyprland";
   services.logind.settings.Login.HandleLidSwitch = "ignore";
   services.logind.settings.Login.HandlePowerKey = "suspend";
