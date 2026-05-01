@@ -4,7 +4,7 @@
   themes = {
     catppuccin-mocha = {
       name = "catppuccin-mocha";
-      wallpaper = "/home/${username}/nixos/data/wallpapers/nixos-wallpaper.png";
+      wallpaper = "/home/${username}/nixos-config/data/wallpapers/nixos-wallpaper.png";
 
       base00 = "#1e1e2e"; # base
       base01 = "#181825"; # mantle
@@ -26,7 +26,7 @@
 
     cherry-blossom = {
       name = "cherry-blossom";
-      wallpaper = "/home/${username}/nixos/data/wallpapers/cherry.png";
+      wallpaper = "/home/${username}/nixos-config/data/wallpapers/cherry.png";
 
       base00 = "#fff8fb"; # Very light pink-white (background)
       base01 = "#fce8f2"; # Soft pink (status bars)
@@ -48,7 +48,7 @@
 
     catppuccin-latte = {
       name = "catppuccin-latte";
-      wallpaper = "/home/${username}/nixos/data/wallpapers/cherry.png";
+      wallpaper = "/home/${username}/nixos-config/data/wallpapers/cherry.png";
 
       base00 = "#eff1f5"; # base
       base01 = "#e6e9ef"; # mantle
@@ -70,7 +70,7 @@
 
     nord = {
       name = "nord";
-      wallpaper = "/home/${username}/nixos/data/wallpapers/nordnix.png";
+      wallpaper = "/home/${username}/nixos-config/data/wallpapers/nordnix.png";
 
       base00 = "#2e3440";
       base01 = "#2e3440";
@@ -95,7 +95,7 @@
 
     gruvbox-dark = {
       name = "gruvbox-dark";
-      wallpaper = "/home/${username}/nixos/data/wallpapers/gruvnix.png";
+      wallpaper = "/home/${username}/nixos-config/data/wallpapers/gruvnix.png";
 
       base00 = "#282828";
       base01 = "#282828";
@@ -120,7 +120,7 @@
 
     frutiger-aero = {
       name = "frutiger-aero";
-      wallpaper = "/home/${username}/nixos/data/wallpapers/frutiger.jpg";
+      wallpaper = "/home/${username}/nixos-config/data/wallpapers/frutiger.jpg";
 
       base00 = "#e8f4f8";
       base01 = "#d4e9f0";

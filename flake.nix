@@ -25,7 +25,7 @@
       ...
     }@inputs:
     let
-      # this config expects to be located in ~/nixos
+      # this config expects to be located in ~/nixos-config/
       system = "x86_64-linux";
       username = "saltcal";
       theme = "catppuccin-mocha";
