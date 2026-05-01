@@ -25,6 +25,7 @@
       ...
     }@inputs:
     let
+      # this config expects to be located in ~/nixos
       system = "x86_64-linux";
       username = "saltcal";
       theme = "catppuccin-mocha";
@@ -40,7 +41,10 @@
           config.allowUnfree = true;
         };
       };
-      allThemes = import ./data/themes.nix { activeTheme = theme; };
+      allThemes = import ./data/themes.nix {
+        activeTheme = theme;
+        inherit username;
+      };
       activeTheme = allThemes.themes.${theme};
       mkHost =
         hostName: modules:

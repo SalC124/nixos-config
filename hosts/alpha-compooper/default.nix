@@ -12,7 +12,6 @@
   programs.zsh = {
     shellAliases = {
       nixedit = "sudo vi /etc/nixos/configuration.nix";
-      rebuild = "cd /etc/nixos/ && nh os switch";
       hyprdir = "vi ~/.config/hypr/";
       ytdl = "yt-dlp -f bestvideo+bestaudio --embed-thumbnail --embed-metadata --embed-chapters --write-auto-subs --embed-subs -P '~/Videos/Youtube Downloads'";
       nixdir = "cd /etc/nixos/ && sudo vi ./";
