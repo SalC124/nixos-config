@@ -2,12 +2,16 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ username, ... }:
+{ inputs, username, ... }:
 
 {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+  ];
+
+  environment.systemPackages = [
+    inputs.nixpkgs-unstable.zed-editor
   ];
 
   # Allow unfree packages
