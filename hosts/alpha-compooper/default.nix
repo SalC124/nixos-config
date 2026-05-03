@@ -296,6 +296,8 @@
     pkgs.ltspice
 
     pkgs.kicad
+
+    inputs.zed-editor.packages.x86_64-linux.default
   ];
   programs.nix-ld.enable = true;
 

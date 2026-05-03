@@ -89,6 +89,7 @@
           ./modules/nixos/core/boot-systemd.nix
           ./modules/nixos/desktop/hyprland.nix
           ./modules/nixos/features/starship.nix
+          ./modules/nixos/features/zed.nix
         ];
       };
     };

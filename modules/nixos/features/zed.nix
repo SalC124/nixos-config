@@ -1,9 +1,5 @@
 { inputs, username, ... }:
 {
-  environment.systemPackages = [
-    inputs.zed-editor.packages.x86_64-linux.default
-  ];
-
   home-manager.users.${username} =
     { config, ... }:
     {
