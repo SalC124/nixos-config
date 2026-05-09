@@ -1,4 +1,8 @@
-{ inputs, username, ... }:
+{
+  username,
+  activeTheme,
+  ...
+}:
 {
   home-manager.users.${username} =
     { config, ... }:
@@ -134,7 +138,15 @@
                   "nickname": "beta-compooper",
                 },
               ],
-              "icon_theme": "Catppuccin Mocha",
+              "icon_theme": "${
+                {
+                  "catppuccin-mocha" = "Catppuccin Mocha";
+                  "catppuccin-frappe" = "Catppuccin Frappé";
+                  "catppuccin-latte" = "Catppuccin Latte";
+                  "gruvbox-dark" = "Gruvbox Dark";
+                }
+                .${activeTheme.name} or "Zed (Default)"
+              }",
               "agent": {
                 "dock": "left",
                 "show_turn_stats": true,
@@ -192,9 +204,22 @@
               "ui_font_features": { "liga": true, "calt": true },
               "buffer_font_features": { "liga": true, "calt": true },
               "theme": {
-                "mode": "dark",
+                "mode": "${
+                  if activeTheme.name == "catppuccin-latte" || activeTheme.name == "frutiger-aero" then
+                    "light"
+                  else
+                    "dark"
+                }",
                 "light": "Catppuccin Latte",
-                "dark": "Catppuccin Mocha",
+                "dark": "${
+                  {
+                    "catppuccin-mocha" = "Catppuccin Mocha";
+                    "catppuccin-frappe" = "Catppuccin Frappé";
+                    "gruvbox-dark" = "Gruvbox Dark";
+                  }
+                  .${activeTheme.name} or "One Dark"
+                }"
+                },
               },
               // "experimental.theme_overrides": {
               //   "background": "#00000000",
