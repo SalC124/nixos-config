@@ -95,7 +95,8 @@
 
     gruvbox-dark = {
       name = "gruvbox-dark";
-      wallpaper = "/home/${username}/nixos-config/data/wallpapers/gruvnix.png";
+      # wallpaper = "/home/${username}/nixos-config/data/wallpapers/gruvnix.png";
+      wallpaper = "/home/${username}/nixos-config/data/wallpapers/botw.png";
 
       base00 = "#282828";
       base01 = "#282828";
