@@ -97,7 +97,7 @@
           ./modules/nixos/desktop/gtk.nix
         ];
 
-        schlaptop = mkHost "framework-schlaptop" "nate" [
+        framework-schlaptop = mkHost "framework-schlaptop" "nate" [
           nixos-hardware.nixosModules.framework-16-7040-amd
           ./modules/nixos/hardware/amd.nix
           ./modules/nixos/core/boot-systemd.nix
