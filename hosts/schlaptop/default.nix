@@ -10,19 +10,6 @@
     ./hardware-configuration.nix
   ];
 
-  programs.git = {
-    enable = true;
-    config = {
-      user.name = "SalC124";
-      user.email = "Saltcal124@gmail.com";
-      init = {
-        defaultBranch = "main";
-      };
-      safe.directory = "*";
-      lfs.enable = true;
-    };
-  };
-
   environment.systemPackages = [
     inputs.nixpkgs-unstable.zed-editor
   ];
@@ -33,5 +20,5 @@
   home-manager.users.${username} = {
     home.stateVersion = "25.11";
   };
-  system.stateVersion = "25.05";
+  system.stateVersion = "25.11";
 }

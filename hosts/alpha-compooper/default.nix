@@ -8,6 +8,19 @@
   ...
 }:
 {
+  programs.git = {
+    enable = true;
+    config = {
+      user.name = "SalC124";
+      user.email = "Saltcal124@gmail.com";
+      init = {
+        defaultBranch = "main";
+      };
+      safe.directory = "*";
+      lfs.enable = true;
+    };
+  };
+
   time.hardwareClockInLocalTime = true;
 
   programs.zsh = {

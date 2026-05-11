@@ -27,7 +27,6 @@
     let
       # this config expects to be located in ~/nixos-config/
       system = "x86_64-linux";
-      username = "saltcal";
       theme = "gruvbox-dark";
 
       # Create an extended inputs with the imported uncpkgs
@@ -41,13 +40,15 @@
           config.allowUnfree = true;
         };
       };
-      allThemes = import ./data/themes.nix {
-        activeTheme = theme;
-        inherit username;
-      };
-      activeTheme = allThemes.themes.${theme};
       mkHost =
-        hostName: modules:
+        hostName: username: modules:
+        let
+          allThemes = import ./data/themes.nix {
+            activeTheme = theme;
+            inherit username;
+          };
+          activeTheme = allThemes.themes.${theme};
+        in
         nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = {
@@ -75,7 +76,7 @@
       formatter.${system} = nixpkgs.legacyPackages.${system}.nixfmt-rfc-style;
 
       nixosConfigurations = {
-        alpha-compooper = mkHost "alpha-compooper" [
+        alpha-compooper = mkHost "alpha-compooper" "saltcal" [
           nixos-hardware.nixosModules.framework-16-7040-amd
           ./modules/nixos/hardware/amd.nix
           ./modules/nixos/core/boot-grub.nix
@@ -88,7 +89,17 @@
           ./modules/nixos/services/flatpak.nix
         ];
 
-        gamma-compooper = mkHost "gamma-compooper" [
+        gamma-compooper = mkHost "gamma-compooper" "saltcal" [
+          ./modules/nixos/core/boot-systemd.nix
+          ./modules/nixos/desktop/hyprland.nix
+          ./modules/nixos/features/starship.nix
+          ./modules/nixos/features/zed.nix
+          ./modules/nixos/desktop/gtk.nix
+        ];
+
+        schlaptop = mkHost "schlaptop" "nate" [
+          nixos-hardware.nixosModules.framework-16-7040-amd
+          ./modules/nixos/hardware/amd.nix
           ./modules/nixos/core/boot-systemd.nix
           ./modules/nixos/desktop/hyprland.nix
           ./modules/nixos/features/starship.nix

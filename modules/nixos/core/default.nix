@@ -46,7 +46,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.${username} = {
     isNormalUser = true;
-    description = "Sal Cali";
+    description = if username == "saltcal" then "Sal Cali" else username;
     extraGroups = [
       "networkmanager"
       "wheel"
@@ -63,19 +63,6 @@
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
-  };
-
-  programs.git = {
-    enable = true;
-    config = {
-      user.name = "SalC124";
-      user.email = "Saltcal124@gmail.com";
-      init = {
-        defaultBranch = "main";
-      };
-      safe.directory = "*";
-      lfs.enable = true;
-    };
   };
 
   programs.zsh = {
