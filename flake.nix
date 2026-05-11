@@ -28,7 +28,7 @@
       # this config expects to be located in ~/nixos-config/
       system = "x86_64-linux";
       username = "saltcal";
-      theme = "catppuccin-mocha";
+      theme = "gruvbox-dark";
 
       # Create an extended inputs with the imported uncpkgs
       extendedInputs = inputs // {
@@ -73,6 +73,7 @@
     in
     {
       formatter.${system} = nixpkgs.legacyPackages.${system}.nixfmt-rfc-style;
+
       nixosConfigurations = {
         alpha-compooper = mkHost "alpha-compooper" [
           nixos-hardware.nixosModules.framework-16-7040-amd
@@ -83,6 +84,8 @@
           ./modules/nixos/features/zed.nix
           ./modules/nixos/features/extraneous.nix
           ./modules/nixos/services/syncthing.nix
+          ./modules/nixos/desktop/gtk.nix
+          ./modules/nixos/services/flatpak.nix
         ];
 
         gamma-compooper = mkHost "gamma-compooper" [
@@ -90,6 +93,7 @@
           ./modules/nixos/desktop/hyprland.nix
           ./modules/nixos/features/starship.nix
           ./modules/nixos/features/zed.nix
+          ./modules/nixos/desktop/gtk.nix
         ];
       };
     };

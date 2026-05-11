@@ -10,6 +10,11 @@ let
   extractToClipboard = pkgs.writeShellScriptBin "txt-extr" ''
     hyprshot -m region --raw | tesseract stdin stdout | wl-copy
   '';
+  cursors = {
+    "catppuccin-mocha" = "Catppuccin Mocha Mauve";
+    "catppuccin-frappe" = "Catppuccin Frappé Dark";
+    "gruvbox-dark" = "Capitaine Cursors (Gruvbox)";
+  };
 in
 {
   imports = [
@@ -19,6 +24,14 @@ in
     ../features/fuzzel.nix
     ../features/hyprpaper.nix
   ];
+
+  environment.sessionVariables = {
+    HYPRCURSOR_THEME = cursors."${activeTheme.name}" or "Bibata-Modern-Ice";
+    XCURSOR_THEME = cursors."${activeTheme.name}" or "Bibata-Modern-Ice";
+    GDK_SCALE = "1";
+    HYPRCURSOR_SIZE = "24";
+    XCURSOR_SIZE = "24";
+  };
 
   services.displayManager.defaultSession = "hyprland";
   services.logind.settings.Login.HandleLidSwitch = "ignore";
@@ -82,12 +95,14 @@ in
       pkgs.playerctl
       pkgs.brightnessctl
       pkgs.pulsemixer
-      pkgs.catppuccin-cursors.mochaDark
+      pkgs.catppuccin-cursors.mochaMauve
+      pkgs.catppuccin-cursors.frappeDark
       pkgs.nwg-look
       pkgs.dconf-editor
       pkgs.banana-cursor
       pkgs.bibata-cursors
       pkgs.tesseract
+      pkgs.capitaine-cursors-themed
     ];
     home.file.".config/hypr/hyprland.conf" = {
       force = true;
@@ -196,15 +211,6 @@ in
 
         # See https://wiki.hyprland.org/Configuring/Environment-variables/
 
-        env = HYPRCURSOR_THEME,${
-          if activeTheme.name != "catppuccin-mocha" then "Bibata-Modern-Ice" else "Catppuccin Mocha Dark"
-        }
-        env = XCURSOR_THEME,${
-          if activeTheme.name != "catppuccin-mocha" then "Bibata-Modern-Ice" else "Catppuccin Mocha Dark"
-        }
-        env = GDK_SCALE,1
-        env = HYPRCURSOR_SIZE,24
-        env = XCURSOR_SIZE,24
 
 
         #####################
