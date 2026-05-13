@@ -143,7 +143,6 @@
                   "catppuccin-mocha" = "Catppuccin Mocha";
                   "catppuccin-frappe" = "Catppuccin Frappé";
                   "catppuccin-latte" = "Catppuccin Latte";
-                  "gruvbox-dark" = "Gruvbox Dark";
                 }
                 .${activeTheme.name} or "Zed (Default)"
               }",
@@ -219,7 +218,6 @@
                   }
                   .${activeTheme.name} or "One Dark"
                 }"
-                },
               },
               // "experimental.theme_overrides": {
               //   "background": "#00000000",
