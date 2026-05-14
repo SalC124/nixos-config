@@ -89,13 +89,6 @@
       rpi-ws-fs = "sudo sshfs -o allow_other,default_permissions saltcal@67.84.35.204:/ /media/rp-sd && cd /media/rp-sd/";
       rpi-ws-ssh = "kitten ssh saltcal@67.84.35.204";
     };
-
-    ohMyZsh = {
-      enable = true;
-      plugins = [
-        "git" # "nix-shell"
-      ];
-    };
   };
 
   # List packages installed in system profile. To search, run:
@@ -152,18 +145,10 @@
 
   fonts.enableDefaultPackages = true;
   fonts.packages = with pkgs; [
-    # fira-code
-    # fira-code-symbols
     font-awesome
     nerd-fonts.jetbrains-mono
     nerd-fonts.caskaydia-cove
     nerd-fonts.fira-code
     cascadia-code
-    # nerdfonts
-    # # (nerdfonts.override { fonts = [
-    # #     "JetBrainsMono"
-    # #   ];
-    # # })
-    # # JetBrainsMono
   ];
 }

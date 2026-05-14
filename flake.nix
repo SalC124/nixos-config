@@ -27,7 +27,6 @@
     let
       # this config expects to be located in ~/nixos-config/
       system = "x86_64-linux";
-      theme = "gruvbox-dark";
 
       # Create an extended inputs with the imported uncpkgs
       extendedInputs = inputs // {
@@ -41,7 +40,12 @@
         };
       };
       mkHost =
-        hostName: username: modules:
+        {
+          hostname,
+          username,
+          theme ? "catppuccin-mocha",
+          modules,
+        }:
         let
           allThemes = import ./data/themes.nix {
             activeTheme = theme;
@@ -56,9 +60,9 @@
             inherit username activeTheme;
           };
           modules = modules ++ [
-            ./hosts/${hostName}
-            ./hosts/${hostName}/hardware-configuration.nix
-            { networking.hostName = hostName; }
+            ./hosts/${hostname}
+            ./hosts/${hostname}/hardware-configuration.nix
+            { networking.hostName = hostname; }
             ./modules/nixos/core/default.nix
             inputs.home-manager.nixosModules.home-manager
             {
@@ -76,36 +80,50 @@
       formatter.${system} = nixpkgs.legacyPackages.${system}.nixfmt-rfc-style;
 
       nixosConfigurations = {
-        alpha-compooper = mkHost "alpha-compooper" "saltcal" [
-          nixos-hardware.nixosModules.framework-16-7040-amd
-          ./modules/nixos/hardware/amd.nix
-          ./modules/nixos/core/boot-grub.nix
-          ./modules/nixos/desktop/hyprland.nix
-          ./modules/nixos/features/starship.nix
-          ./modules/nixos/features/zed.nix
-          ./modules/nixos/features/extraneous.nix
-          ./modules/nixos/services/syncthing.nix
-          ./modules/nixos/desktop/gtk.nix
-          ./modules/nixos/services/flatpak.nix
-        ];
+        alpha-compooper = mkHost {
+          hostname = "alpha-compooper";
+          username = "saltcal";
+          modules = [
+            nixos-hardware.nixosModules.framework-16-7040-amd
+            ./modules/nixos/hardware/amd.nix
+            ./modules/nixos/core/boot-grub.nix
+            ./modules/nixos/desktop/hyprland.nix
+            ./modules/nixos/features/starship.nix
+            ./modules/nixos/features/zed.nix
+            ./modules/nixos/features/extraneous.nix
+            ./modules/nixos/services/syncthing.nix
+            ./modules/nixos/desktop/gtk.nix
+            ./modules/nixos/services/flatpak.nix
+          ];
+        };
 
-        gamma-compooper = mkHost "gamma-compooper" "saltcal" [
-          ./modules/nixos/core/boot-systemd.nix
-          ./modules/nixos/desktop/hyprland.nix
-          ./modules/nixos/features/starship.nix
-          ./modules/nixos/features/zed.nix
-          ./modules/nixos/desktop/gtk.nix
-        ];
+        gamma-compooper = mkHost {
+          hostname = "gamma-compooper";
+          username = "saltcal";
+          modules = [
+            ./modules/nixos/core/boot-systemd.nix
+            ./modules/nixos/desktop/hyprland.nix
+            ./modules/nixos/features/starship.nix
+            ./modules/nixos/features/zed.nix
+            ./modules/nixos/desktop/gtk.nix
+          ];
+          theme = "gruvbox-dark";
+        };
 
-        framework-schlaptop = mkHost "framework-schlaptop" "nate" [
-          nixos-hardware.nixosModules.framework-16-7040-amd
-          ./modules/nixos/hardware/amd.nix
-          ./modules/nixos/core/boot-systemd.nix
-          ./modules/nixos/desktop/hyprland.nix
-          ./modules/nixos/features/starship.nix
-          ./modules/nixos/features/zed.nix
-          ./modules/nixos/desktop/gtk.nix
-        ];
+        framework-schlaptop = mkHost {
+          hostname = "framework-schlaptop";
+          username = "nate";
+          modules = [
+            nixos-hardware.nixosModules.framework-16-7040-amd
+            ./modules/nixos/hardware/amd.nix
+            ./modules/nixos/core/boot-systemd.nix
+            ./modules/nixos/desktop/hyprland.nix
+            ./modules/nixos/features/starship.nix
+            ./modules/nixos/features/zed.nix
+            ./modules/nixos/desktop/gtk.nix
+          ];
+          theme = "gruvbox-dark";
+        };
       };
     };
 }
