@@ -52,8 +52,6 @@
   # $ nix search wget
   nixpkgs.config.allowUnfreePredicate = nixpkgs-: true;
   environment.systemPackages = [
-    pkgs.zsh-powerlevel10k
-    # pkgs.zsh-nix-shell
     pkgs.lshw
     pkgs.ntfs3g
     pkgs.tree

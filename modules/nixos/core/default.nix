@@ -65,6 +65,8 @@
     vimAlias = true;
   };
 
+  programs.zoxide.enableZshIntegration = true;
+
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -73,11 +75,16 @@
     histSize = 10000;
     histFile = "~/.zsh_history";
     autosuggestions.async = true;
+    interactiveShellInit = ''
+      bindkey -v
+      export KEYTIMEOUT=1
+      bindkey '^?' backward-delete-char
+    '';
 
-    promptInit = ''
-      eval "$(zoxide init --cmd cd zsh)"
-    ''; # eval "$(zellij setup --generate-auto-start zsh)"
-
+    ohMyZsh = {
+      enable = true;
+      plugins = [ "vi-mode" ];
+    };
     shellAliases = {
       kys = ''echo "u too"; systemctl poweroff'';
       brb = ''echo "buh-bye!"; systemctl reboot'';
@@ -107,7 +114,6 @@
     pkgs.unzip
     pkgs.jq
 
-    pkgs.zoxide
     pkgs.fzf
     pkgs.lsd
     pkgs.yazi
@@ -132,6 +138,7 @@
     settings = {
       hide_env_diff = true;
     };
+    enableZshIntegration = true;
   };
 
   # TODO fix

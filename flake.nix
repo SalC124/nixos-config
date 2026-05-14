@@ -28,7 +28,6 @@
       # this config expects to be located in ~/nixos-config/
       system = "x86_64-linux";
 
-      # Create an extended inputs with the imported uncpkgs
       extendedInputs = inputs // {
         uncpkgs = import uncpkgs {
           inherit system;
@@ -73,7 +72,6 @@
               home-manager.backupFileExtension = "backup";
             }
           ];
-          # ++ (if hostName == "gamma-compooper" then [ ./modules/nixos/services/remote-builder.nix ] else [ ]);
         };
     in
     {

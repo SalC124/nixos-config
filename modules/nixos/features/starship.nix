@@ -4,9 +4,6 @@
   ...
 }:
 {
-  programs.zsh.promptInit = ''
-    eval "$(starship init zsh)"
-  '';
   home-manager.users.${username} = {
     programs.starship = {
       enable = true;
@@ -77,7 +74,7 @@
         disabled = false
         success_symbol = '[❯](bold fg:green)'
         error_symbol = '[❯](bold fg:red)'
-        vimcmd_symbol = '[❮](bold fg:green)'
+        vimcmd_symbol = '[N](bold fg:green)'
 
         [nodejs]
         symbol = ""

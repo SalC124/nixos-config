@@ -371,7 +371,10 @@ in
             touchpad {
                 natural_scroll = true
         	      tap-and-drag = false
-                clickfinger_behavior = true
+                ${
+                  # clickfinger_behavior = true
+                  ""
+                }
                 disable_while_typing = false
                 middle_button_emulation = true
             }
