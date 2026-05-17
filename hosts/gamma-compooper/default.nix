@@ -2,7 +2,12 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ inputs, username, ... }:
+{
+  inputs,
+  username,
+  pkgs,
+  ...
+}:
 
 {
   imports = [
@@ -25,6 +30,7 @@
 
   environment.systemPackages = [
     inputs.nixpkgs-unstable.zed-editor
+    pkgs.spotify
   ];
 
   # Allow unfree packages

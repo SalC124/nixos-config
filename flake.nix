@@ -105,7 +105,7 @@
             ./modules/nixos/features/zed.nix
             ./modules/nixos/desktop/gtk.nix
           ];
-          theme = "gruvbox-dark";
+          theme = "catppuccin-mocha";
         };
 
         framework-schlaptop = mkHost {
