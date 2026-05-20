@@ -313,6 +313,10 @@
   ];
   programs.nix-ld.enable = true;
 
+  services.udev.extraRules = ''
+    SUBSYSTEMS=="usb", ATTRS{idVendor}=="2341", ATTRS{idProduct}=="0364", MODE="0666"
+  '';
+
   programs.java = {
     enable = true;
     # package = pkgs.temurin-jre-bin-24; # depr-d
@@ -323,7 +327,10 @@
 
   hardware.keyboard.qmk.enable = true;
 
-  services.udev.packages = [ pkgs.via ];
+  services.udev.packages = [
+    pkgs.via
+    pkgs.arduino-core
+  ];
 
   programs.adb.enable = true;
 
