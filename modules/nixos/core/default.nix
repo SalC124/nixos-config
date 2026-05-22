@@ -52,6 +52,7 @@
       "wheel"
       "adbusers"
       "dialout"
+      "plugdev"
     ];
     # packages = with pkgs; [];
   };
