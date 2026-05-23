@@ -66,7 +66,10 @@
     vimAlias = true;
   };
 
-  programs.zoxide.enableZshIntegration = true;
+  programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
+  };
 
   programs.zsh = {
     enable = true;
@@ -80,6 +83,9 @@
       bindkey -v
       export KEYTIMEOUT=1
       bindkey '^?' backward-delete-char
+    '';
+    promptInit = ''
+      eval "$(zoxide init --cmd cd zsh)"
     '';
 
     ohMyZsh = {
