@@ -430,7 +430,10 @@ in
         bind = $SUPER_SHIFT alt, l, exec, hyprlock
 
         # audio controls
-        bindl = , XF86AudioPlay, exec, playerctl --all-players play-pause
+        bindl = , XF86AudioPlay, exec, playerctl -p spotify play-pause
+        bindl = , XF86AudioPrev, exec, playerctl -p spotify previous
+        bindl = , XF86AudioNext, exec, playerctl -p spotify next
+
         bindl = , XF86AudioMute, exec, pamixer --toggle-mute --allow-boost
         binde = , XF86AudioLowerVolume, exec, pamixer --decrease 5 --allow-boost
         binde = , XF86AudioRaiseVolume, exec, pamixer --increase 5 --allow-boost
