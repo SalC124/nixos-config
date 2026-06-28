@@ -546,7 +546,7 @@ in
         # temp term
         windowrule = float, class:floating
         windowrule = center 1, class:floating
-        windowrule = size 800 540, class:floating
+        windowrule = size 798 504, class:floating
         # windowrule = forcergbx, class:floating
         # windowrule = opacity 100%, class:floating
 
@@ -594,6 +594,9 @@ in
 
         windowrule = float,initialTitle:Claude
         windowrule = size 607 641, initialTitle:Claude
+
+        windowrule = float,initialTitle:Clod
+        windowrule = size 607 641, initialTitle:Clod
 
 
 

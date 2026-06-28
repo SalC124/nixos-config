@@ -38,7 +38,7 @@ let
     @define-color headerbar_backdrop_color @window_bg_color;
 
     /* 5. Inputs and Selections */
-    @define-color focus_border_color rgba(${activeTheme.base0E}, 0.5);
+    @define-color focus_border_color ${activeTheme.base0E};
     @define-color selection_bg_color ${activeTheme.base0E};
     @define-color selection_fg_color ${activeTheme.base00};
 

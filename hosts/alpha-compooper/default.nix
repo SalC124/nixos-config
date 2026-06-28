@@ -52,6 +52,8 @@
   # $ nix search wget
   nixpkgs.config.allowUnfreePredicate = nixpkgs-: true;
   environment.systemPackages = [
+    pkgs.microsoft-edge
+
     pkgs.lshw
     pkgs.ntfs3g
     pkgs.tree
@@ -76,14 +78,13 @@
     pkgs.simulide
     # pkgs.vscode-fhs
     pkgs.vscode-fhs
-    pkgs.python312
     # pkgs.python312Packages.matplotlib
 
-    pkgs.libgcc
-    pkgs.nasm
-    pkgs.libgccjit
-    pkgs.llvmPackages_latest.llvm
-    pkgs.binutils_nogold
+    # pkgs.libgcc
+    # pkgs.nasm
+    # pkgs.libgccjit
+    # pkgs.llvmPackages_latest.llvm
+    # pkgs.binutils_nogold
     # pkgs.zulu8
     # pkgs.zulu11
     # pkgs.zulu17
@@ -110,8 +111,8 @@
     pkgs.flutter
     pkgs.postman
     pkgs.gradle
-    pkgs.jupyter-all
-    pkgs.kotlin
+    # pkgs.jupyter-all
+    # pkgs.kotlin
     # pkgs.kicad
     pkgs.ngspice
     pkgs.logisim-evolution
@@ -330,6 +331,8 @@
   services.udev.packages = [
     pkgs.via
     pkgs.arduino-core
+    pkgs.wireguard-tools
+    pkgs.protonvpn-gui
   ];
 
   programs.adb.enable = true;
@@ -416,12 +419,12 @@
           "bluez5.enable-sbc-xq" = true;
           "bluez5.enable-msbc" = true;
           "bluez5.enable-hw-volume" = true;
-          "bluez5.roles" = [
-            "hsp_hs"
-            "hsp_ag"
-            "hfp_hf"
-            "hfp_ag"
-          ];
+          # "bluez5.roles" = [
+          #   "hsp_hs"
+          #   "hsp_ag"
+          #   "hfp_hf"
+          #   "hfp_ag"
+          # ];
         };
       };
     };

@@ -111,7 +111,6 @@
   environment.systemPackages = [
     pkgs.man-pages
     pkgs.nh
-    inputs.uncpkgs.microsoft-edge
     inputs.zen-browser.packages.x86_64-linux.twilight
     pkgs.firefox
     pkgs.ripgrep

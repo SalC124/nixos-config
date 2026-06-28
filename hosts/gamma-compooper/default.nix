@@ -31,6 +31,7 @@
   environment.systemPackages = [
     inputs.nixpkgs-unstable.zed-editor
     pkgs.spotify
+    inputs.uncpkgs.microsoft-edge
   ];
 
   # Allow unfree packages

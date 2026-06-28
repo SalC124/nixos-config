@@ -12,6 +12,7 @@
 
   environment.systemPackages = [
     inputs.nixpkgs-unstable.zed-editor
+    inputs.uncpkgs.microsoft-edge
   ];
 
   # Allow unfree packages

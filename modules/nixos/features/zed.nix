@@ -282,7 +282,7 @@
                   },
                   "always_treat_brackets_as_autoclosed": true,
                   "enable_language_server": true,
-                  "format_on_save": "off",
+                  "format_on_save": "on",
                 },
                 "Python": {
                   "format_on_save": "off",
@@ -576,6 +576,100 @@
                 "context": "Terminal",
                 "unbind": {
                   "ctrl-enter": "assistant::InlineAssist",
+                },
+              },
+              {
+                "context": "Workspace",
+                "unbind": {
+                  "ctrl-r": [
+                    "projects::OpenRecent",
+                    {
+                      "create_new_window": false
+                    }
+                  ]
+                }
+              },
+              {
+                "unbind": {
+                  "ctrl-+": [
+                    "zed::IncreaseBufferFontSize",
+                    {
+                      "persist": false,
+                    },
+                  ],
+                },
+              },
+              {
+                "context": "Welcome",
+                "unbind": {
+                  "ctrl-+": [
+                    "zed::IncreaseUiFontSize",
+                    {
+                      "persist": false,
+                    },
+                  ],
+                },
+              },
+              {
+                "bindings": {
+                  "ctrl-+": [
+                    "zed::IncreaseUiFontSize",
+                    {
+                      "persist": false,
+                    },
+                  ],
+                },
+              },
+              {
+                "context": "Onboarding",
+                "unbind": {
+                  "ctrl--": [
+                    "zed::DecreaseUiFontSize",
+                    {
+                      "persist": false,
+                    },
+                  ],
+                },
+              },
+              {
+                "context": "Welcome",
+                "unbind": {
+                  "ctrl--": [
+                    "zed::DecreaseUiFontSize",
+                    {
+                      "persist": false,
+                    },
+                  ],
+                },
+              },
+              {
+                "bindings": {
+                  "ctrl-_": [
+                    "zed::DecreaseUiFontSize",
+                    {
+                      "persist": false,
+                    },
+                  ],
+                },
+              },
+              {
+                "bindings": {
+                  "ctrl-0": [
+                    "zed::ResetBufferFontSize",
+                    {
+                      "persist": false,
+                    },
+                  ],
+                },
+              },
+              {
+                "bindings": {
+                  "ctrl-)": [
+                    "zed::ResetUiFontSize",
+                    {
+                      "persist": false,
+                    },
+                  ],
                 },
               },
             ]
