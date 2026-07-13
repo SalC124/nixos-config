@@ -7,9 +7,6 @@
 }:
 
 let
-  extractToClipboard = pkgs.writeShellScriptBin "txt-extr" ''
-    hyprshot -m region --raw | tesseract stdin stdout | wl-copy
-  '';
   cursors = {
     "catppuccin-mocha" = "Catppuccin Mocha Mauve";
     "catppuccin-frappe" = "Catppuccin Frappé Dark";
@@ -23,6 +20,7 @@ in
     ../features/waybar.nix
     ../features/fuzzel.nix
     ../features/hyprpaper.nix
+    ../features/txt-extr.nix
   ];
 
   environment.sessionVariables = {
@@ -101,7 +99,6 @@ in
       pkgs.dconf-editor
       pkgs.banana-cursor
       pkgs.bibata-cursors
-      pkgs.tesseract
       pkgs.capitaine-cursors-themed
     ];
     home.file.".config/hypr/hyprland.conf" = {
@@ -424,7 +421,7 @@ in
         bind = ctrl, Print, exec, hyprshot -m output -m eDP-2 -o ~/Pictures/Screenshots/ -z
 
         # extract text
-        bind = $mainMod SHIFT, t, exec, ${lib.getExe extractToClipboard}
+        bind = $mainMod SHIFT, t, exec, txt-extr
 
         # lock screen
         bind = $SUPER_SHIFT alt, l, exec, hyprlock
