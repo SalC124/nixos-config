@@ -257,47 +257,6 @@
       hyprctl hyprpaper reload ,"$next"
     '')
 
-    # inputs.nixpkgs-unstable.zed-editor
-    #inputs.zed-editor.packages.${pkgs.system}.default
-    # inputs.nixpkgs-unstable.zed-editor-fhs
-    # pkgs.zed-editor-fhs
-    # ((import ./pkgs/zed-editor.nix { inherit pkgs; }).fhs.overrideAttrs (old: {
-    #   # Rename the executable so it replaces the plain one
-    #   installPhase = ''
-    #     runHook preInstall
-    #     cp -r ${old.out}/* $out/
-    #     ln -sf $out/libexec/zed-editor $out/bin/zeditor
-    #     runHook postInstall
-    #   '';
-    # }))
-    # pkgs.zed-editor-fhs
-    #(inputs.nixpkgs-unstable.zed-editor.fhsWithPackages
-    #  (pkgs: [
-    #    # rustup
-    #    inputs.nixpkgs-unstable.cargo
-    #    inputs.nixpkgs-unstable.rustc
-    #    inputs.nixpkgs-unstable.rust-analyzer
-    #  ]))
-    # (pkgs.zed-editor.fhsWithPackages
-    #   (pkgs: with pkgs; [
-    #     rustup
-    #     cargo
-    #     rustc
-    #     rust-analyzer
-    #   ]))
-
-    #(pkgs.callPackage ./pkgs/zed-editor/package.nix { })
-
-    # prev best
-    # (pkgs.callPackage ./pkgs-unstable/zed-editor-fhs/package.nix {
-    #   rustPlatform = pkgs.makeRustPlatform {
-    #     cargo = inputs.nixpkgs-unstable.cargo;
-    #     rustc = inputs.nixpkgs-unstable.rustc;
-    #   };
-    #   stdenv = inputs.nixpkgs-unstable.stdenv;
-    #
-    # })
-
     pkgs.croc
 
     pkgs.digital
@@ -375,10 +334,13 @@
   services.ratbagd.enable = true;
 
   services.ollama = {
-    enable = false;
+    enable = true;
     acceleration = "rocm";
-    package = pkgs.ollama-rocm;
+    package = inputs.nixpkgs-unstable.ollama-rocm;
     rocmOverrideGfx = "11.0.0";
+    environmentVariables = {
+      DRI_PRIME = "1";
+    };
   };
 
   # TODO fix
@@ -446,6 +408,7 @@
     "amdgpu.si_support=1"
     "video=eDP-2:2560x1600@165" # fix displays
     "video=DP-1:2560x1440@144" # fix displays
+    "amdgpu.runpm=1" # conditionally on or off
   ];
   home-manager.users.${username} = {
     home.stateVersion = "25.11";
