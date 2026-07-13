@@ -69,7 +69,7 @@
               home-manager.useUserPackages = true;
               home-manager.extraSpecialArgs = { inherit inputs username activeTheme; };
               home-manager.users.${username} = import ./modules/home/default.nix;
-              home-manager.backupFileExtension = "backup";
+              home-manager.backupFileExtension = "hm-backup";
             }
           ];
         };

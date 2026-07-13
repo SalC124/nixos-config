@@ -74,6 +74,7 @@ in
     # Set the GTK 3.0 theme
     gtk = {
       enable = true;
+      gtk2.force = true;
       theme = {
         name = "adw-gtk3";
         package = pkgs.adw-gtk3;
