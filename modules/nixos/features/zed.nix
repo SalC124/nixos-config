@@ -45,7 +45,7 @@
               },
               "linked_edits": true,
               "colorize_brackets": true,
-              "disable_ai": true,
+              "disable_ai": false,
               "show_edit_predictions": false,
               "edit_predictions": {
                 "mode": "eager",
@@ -61,10 +61,7 @@
               },
               "agent_servers": {
                 "github-copilot-cli": {
-                  "favorite_config_option_values": {
-                    "model": ["claude-sonnet-4.6", "claude-opus-4.6", "claude-haiku-4.5"],
-                  },
-                  "type": "registry",
+                  "type": "registry"
                 },
                 "github-copilot": {
                   "default_model": "claude-opus-4.6",
