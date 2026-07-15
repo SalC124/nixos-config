@@ -12,7 +12,6 @@
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    preservation.url = "github:nix-community/preservation";
   };
 
   outputs =
@@ -23,7 +22,6 @@
       uncpkgs,
       nixpkgs-unstable,
       zed-editor,
-      preservation,
       ...
     }@inputs:
     let
@@ -94,8 +92,6 @@
             ./modules/nixos/services/syncthing.nix
             ./modules/nixos/desktop/gtk.nix
             ./modules/nixos/services/flatpak.nix
-
-            preservation.nixosModules.default
           ];
         };
 

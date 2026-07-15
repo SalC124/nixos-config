@@ -22,146 +22,23 @@
   };
 
   time.hardwareClockInLocalTime = true;
-  boot.initrd.systemd.enable = true;
-
-  # Ephemeral home: everything under /home/${username} resets on reboot
-  # except the bind-mounted paths listed in persistedHomeDirs.
-  fileSystems = {
-    # 1. Create the ephemeral root in RAM
-    "/" = {
-      device = "none";
-      fsType = "tmpfs";
-      options = [
-        "size=6G"
-        "mode=0755"
-      ];
-    };
-
-    # 2. Re-route your existing hard drive to /persistent
-    "/persistent" = {
-      device = "/dev/disk/by-uuid/8a90e925-cc89-40d8-b35d-e54bb387fd2f";
-      fsType = "ext4";
-      neededForBoot = true;
-    };
-
-    # 3. Bind /persistent/nix into /nix
-    "/nix" = {
-      device = "/persistent/nix";
-      fsType = "none";
-      options = [ "bind" ];
-      neededForBoot = true;
-    };
-  };
-
-  swapDevices = [ { device = "/dev/disk/by-uuid/e9244592-e397-4dde-96d4-3ddfe1be0dff"; } ];
-
-  boot.tmp.cleanOnBoot = true;
-  preservation = {
-    enable = true;
-    preserveAt."/persistent" = {
-      # System essentials
-      directories = [
-        "/var/log"
-        "/var/lib/nixos"
-        "/var/lib/systemd"
-        # "/var/lib/bluetooth"
-        # "/etc/NetworkManager/system-connections"
-        # "/tmp"
-      ];
-      files = [
-        "/etc/machine-id"
-        "/etc/adjtime"
-	"/etc/passwd"
-	"/etc/shadow"
-      ];
-
-      # Your user files remain perfectly safe because they are sitting inside
-      # /persistent/home/${username} on your real drive.
-      users.${username} = {
-        directories = [
-          "Code"
-          "Documents"
-          "Downloads"
-          "Music"
-          "Pictures"
-          "Videos"
-          "Projects"
-          "Obsidian"
-          "nixos-config"
-          "switch-tings_nouveau"
-          "alex 3ds"
-          "StudioProjects"
-          "AndroidStudioProjects"
-          "minecraft-servers"
-          "Arduino"
-
-          # Configurations & State
-          ".ssh"
-          ".gnupg"
-          ".local/share"
-          ".local/state"
-          ".config/home-manager"
-          ".config/syncthing"
-          ".config/Vencord"
-          ".config/vesktop"
-          ".config/systemd"
-          ".config/spotify"
-          ".config/r2modman"
-          ".config/r2modmanPlus-local"
-          ".config/Proton"
-          ".config/microsoft-edge"
-          ".config/ModrinthApp"
-          ".config/MuseScore"
-          ".config/obs-studio"
-          ".config/obsidian"
-          ".config/ltspice"
-          ".config/libreoffice"
-          ".config/kicad"
-          ".config/JetBrains"
-          ".config/godot"
-          ".config/git"
-          ".config/github-copilot"
-          ".config/Electron"
-          ".config/com.modrinth.theseus"
-          ".config/discord"
-          ".config/Discord"
-          ".config/chromium"
-          ".config/zed"
-          ".config/Arduino IDE"
-          ".config/arduino-ide"
-
-          # App-specific runtime paths
-          ".zed"
-          ".steam"
-          ".steampath"
-          ".steampid"
-          ".mozilla"
-          ".muse-sounds-manager"
-          ".nix-defexpr"
-          ".nix-profile"
-          ".npm"
-          ".ollama"
-          ".android"
-          ".arduino15"
-          ".arduinoIDE"
-          ".cargo"
-          ".var/app"
-          ".cache"
-        ];
-      };
-    };
-  };
 
   programs.zsh = {
     shellAliases = {
+      nixedit = "sudo vi /etc/nixos/configuration.nix";
+      hyprdir = "vi ~/.config/hypr/";
       ytdl = "yt-dlp -f bestvideo+bestaudio --embed-thumbnail --embed-metadata --embed-chapters --write-auto-subs --embed-subs -P '~/Videos/Youtube Downloads'";
+      nixdir = "cd /etc/nixos/ && sudo vi ./";
+      vs = "cd ~/ && sudo code --no-sandbox --user-data-dir='.config/Code'";
+      sysflk = "sudo vi /etc/nixos/flake.nix";
+      nvedit = "sudo vi /etc/nixos/nxtvim/";
       yz = "yazi";
       kill-zj = ''zellij kill-all-sessions -y || echo "why dont you read with your eyes?" && zellij delete-all-sessions -y'';
       nv = "vi ./";
       zi = "zeditor";
       envy = "vi ./";
       zj = "zellij";
-      # ardwork = "sudo chmod a+rw /dev/ttyACM0; sudo chmod a+rw /dev/ttyUSB0";
+      ardwork = "sudo chmod a+rw /dev/ttyACM0; sudo chmod a+rw /dev/ttyUSB0";
     };
   };
 
@@ -474,6 +351,7 @@
     # GDK_BACKEND = "x11"; # NEVER USE THIS WITH HYPRLAND
     LIBCLANG_PATH = "/home/saltcal/.rustup/toolchains/esp/xtensa-esp32-elf-clang/esp-18.1.2_20240912/esp-clang/lib";
     # JAVA_HOME = "${pkgs.temurin-bin-24}";
+    PATH = "/home/saltcal/Code/Personal/rust/projects/vanilla/dice/target/release:/home/saltcal/Code/Personal/rust/projects/vanilla/weather/target/release:/home/saltcal/.cargo/bin:/home/saltcal/Code/Personal/rust/projects/vanilla/prostrate_man/target/release:/home/saltcal/.rustup/toolchains/esp/xtensa-esp-elf/esp-14.2.0_20240906/xtensa-esp-elf/bin:$JAVA_HOME/bin:$PATH";
     PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
     ROCKET_CODEGEN_DEBUG = "1";
   };
