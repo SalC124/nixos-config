@@ -11,8 +11,7 @@
       force = true;
       text = ''
         [main]
-        font=CaskaydiaCove Nerd Font Mono:size=12
-        scale=1.2
+        font=CaskaydiaCove Nerd Font Mono:size=13
         prompt="❯ "
 
         [colors]
