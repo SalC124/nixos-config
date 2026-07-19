@@ -5,7 +5,7 @@
 }:
 {
   imports = [
-    ./common-wayland.nix
+    ./raw-wayland.nix
   ];
 
   programs.niri.enable = true;

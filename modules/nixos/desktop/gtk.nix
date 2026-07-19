@@ -2,10 +2,18 @@
   activeTheme,
   pkgs,
   username,
+  lib,
   ...
 }:
 
 let
+  isDark = lib.elem activeTheme.name [
+    "catppuccin-mocha"
+    "nord"
+    "gruvbox-dark"
+    "catppuccin-frappe"
+  ];
+
   # Generate the CSS using your existing activeTheme variables
   # These names (accent_bg_color, etc.) are the standard Libadwaita variables
   gtkCss = ''
@@ -55,20 +63,29 @@ let
     "catppuccin-frappe" = "Catppuccin Frappé Dark";
     "gruvbox-dark" = "Capitaine Cursors (Gruvbox)";
   };
+
+  cursor-theme = cursors."${activeTheme.name}" or "Bibata-Modern-Ice";
 in
 {
   environment.sessionVariables = {
-    GTK_THEME = "adw-gtk3";
+    # GTK_THEME = "adw-gtk3";
+    QT_QPA_PLATFORMTHEME = "gtk3";
   };
 
   home-manager.users.${username} = {
     # Install adw-gtk3 for the structural look
-    home.packages = [ pkgs.adw-gtk3 ];
+    home.packages = [
+      pkgs.adw-gtk3
+      pkgs.adwaita-qt
+      pkgs.adwaita-qt6
+    ];
 
     dconf.settings = {
       "org/gnome/desktop/interface" = {
-        cursor-theme = cursors."${activeTheme.name}" or "Bibata-Modern-Ice";
+        cursorTheme = cursor-theme;
+        color-scheme = if isDark then "prefer-dark" else "prefer-light";
         cursor-size = 24; # Match your HYPRCURSOR_SIZE
+        gtk-theme = "adw-gtk3";
       };
     };
     # Set the GTK 3.0 theme
@@ -79,14 +96,35 @@ in
         name = "adw-gtk3";
         package = pkgs.adw-gtk3;
       };
+      cursorTheme = {
+        name = cursor-theme;
+        package = pkgs.adwaita-qt6;
+      };
+      gtk3.extraConfig = {
+        gtk-application-prefer-dark-theme = if isDark then 1 else 0;
+      };
+      gtk4.extraConfig = {
+        gtk-application-prefer-dark-theme = if isDark then 1 else 0;
+      };
+    };
+
+    qt = {
+      enable = true;
+      platformTheme.name = "gtk3";
+      style = {
+        name = if isDark then "adwaita-dark" else "adwaita";
+        package = pkgs.adwaita-qt6;
+      };
     };
 
     # Inject your theme variables into the system CSS configs
     # This is the "Unification" step
-    xdg.configFile = {
-      "gtk-3.0/gtk.css".text = gtkCss;
-      "gtk-4.0/gtk.css".text = gtkCss;
-      "gtk-4.0/gtk-dark.css".text = gtkCss;
+    xdg = {
+      configFile = {
+        "gtk-3.0/gtk.css".text = gtkCss;
+        "gtk-4.0/gtk.css".text = gtkCss;
+        "gtk-4.0/gtk-dark.css".text = gtkCss;
+      };
     };
   };
 }

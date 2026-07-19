@@ -57,6 +57,8 @@
     # packages = with pkgs; [];
   };
 
+  hardware.graphics.enable = true;
+
   users.defaultUserShell = pkgs.zsh;
 
   programs.neovim = {

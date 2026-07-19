@@ -45,7 +45,7 @@
               },
               "linked_edits": true,
               "colorize_brackets": true,
-              "disable_ai": false,
+              "disable_ai": true,
               "show_edit_predictions": false,
               "edit_predictions": {
                 "mode": "eager",

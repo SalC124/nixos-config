@@ -15,6 +15,7 @@ let
 in
 {
   imports = [
+    ./raw-wayland.nix
     ./common-wayland.nix
     ../features/kitty.nix
     ../features/waybar.nix

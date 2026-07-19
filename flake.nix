@@ -93,6 +93,7 @@
             ./modules/nixos/desktop/gtk.nix
             ./modules/nixos/services/flatpak.nix
           ];
+          theme = "catppuccin-frappe";
         };
 
         gamma-compooper = mkHost {

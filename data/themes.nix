@@ -26,7 +26,7 @@
 
     catppuccin-frappe = {
       name = "catppuccin-frappe";
-      wallpaper = "/home/${username}/nixos-config/data/wallpapers/frapnix.png";
+      wallpaper = "/home/${username}/nixos-config/data/wallpapers/cherry.png";
 
       base00 = "#303446"; # base
       base01 = "#292c3c"; # mantle

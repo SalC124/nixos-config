@@ -23,7 +23,7 @@
 
         font_size 18
 
-        background_opacity 0.5
+        background_opacity 0.0
 
         tab_bar_edge     top
         tab_bar_style    slant
