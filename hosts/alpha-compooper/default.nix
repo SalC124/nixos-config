@@ -25,18 +25,9 @@
 
   programs.zsh = {
     shellAliases = {
-      nixedit = "sudo vi /etc/nixos/configuration.nix";
-      hyprdir = "vi ~/.config/hypr/";
       ytdl = "yt-dlp -f bestvideo+bestaudio --embed-thumbnail --embed-metadata --embed-chapters --write-auto-subs --embed-subs -P '~/Videos/Youtube Downloads'";
-      nixdir = "cd /etc/nixos/ && sudo vi ./";
-      vs = "cd ~/ && sudo code --no-sandbox --user-data-dir='.config/Code'";
-      sysflk = "sudo vi /etc/nixos/flake.nix";
-      nvedit = "sudo vi /etc/nixos/nxtvim/";
       yz = "yazi";
       kill-zj = ''zellij kill-all-sessions -y || echo "why dont you read with your eyes?" && zellij delete-all-sessions -y'';
-      nv = "vi ./";
-      zi = "zeditor";
-      envy = "vi ./";
       zj = "zellij";
       ardwork = "sudo chmod a+rw /dev/ttyACM0; sudo chmod a+rw /dev/ttyUSB0";
     };
