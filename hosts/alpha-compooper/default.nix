@@ -410,22 +410,14 @@
     "amdgpu.runpm=1" # conditionally on or off
   ];
 
-  nix.settings = {
-    show-trace = true;
-    sandbox = true;
+  # nix.settings = {
+  #   show-trace = true;
+  #   sandbox = true;
 
-    sandbox-paths = [ "/bin/sh=${pkgs.busybox-sandbox-shell.out}/bin/busybox" ];
-
-    cores = 0;
-    auto-optimise-store = true;
-    max-jobs = 16;
-
-    extra-sandbox-paths = [
-      "/dev"
-      "/proc"
-      "/nix"
-    ];
-  };
+  #   cores = 0;
+  #   auto-optimise-store = true;
+  #   max-jobs = 16;
+  # };
 
   home-manager.users.${username} = {
     home.stateVersion = "25.11";
