@@ -99,7 +99,7 @@
       brb = ''echo "buh-bye!"; systemctl reboot'';
       eep = ''echo "zzz..."; systemctl sleep'';
       update = "cd /etc/nixos/ && sudo nix flake update";
-      ls = "lsd -A";
+      ls = "eza -A --icons --color=always --git"; # --group-directories-first
       py = "python";
       cleanup = "nix-collect-garbage";
       rpi-ws-fs = "sudo sshfs -o allow_other,default_permissions saltcal@67.84.35.204:/ /media/rp-sd && cd /media/rp-sd/";

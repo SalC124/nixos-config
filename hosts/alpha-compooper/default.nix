@@ -409,6 +409,24 @@
     "video=DP-1:2560x1440@144" # fix displays
     "amdgpu.runpm=1" # conditionally on or off
   ];
+
+  nix.settings = {
+    show-trace = true;
+    sandbox = true;
+
+    sandbox-paths = [ "/bin/sh=${pkgs.busybox-sandbox-shell.out}/bin/busybox" ];
+
+    cores = 0;
+    auto-optimise-store = true;
+    max-jobs = 16;
+
+    extra-sandbox-paths = [
+      "/dev"
+      "/proc"
+      "/nix"
+    ];
+  };
+
   home-manager.users.${username} = {
     home.stateVersion = "25.11";
   };
