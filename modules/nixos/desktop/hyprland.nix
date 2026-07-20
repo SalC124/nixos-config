@@ -596,6 +596,10 @@ in
         windowrule = float,initialTitle:Clod
         windowrule = size 607 641, initialTitle:Clod
 
+        # fix stupid edge hovering windows
+        windowrule = float, class:^$, title:^$
+        windowrule = noinitialfocus, class:^$, title:^$
+        windowrule = move cursor, class:^$, title:^$
 
 
         exec = pkill waybar; waybar
