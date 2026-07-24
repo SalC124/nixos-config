@@ -599,7 +599,7 @@ in
         # fix stupid edge hovering windows
         windowrule = float, class:^$, title:^$
         windowrule = noinitialfocus, class:^$, title:^$
-        windowrule = move cursor, class:^$, title:^$
+        windowrule = move cursor 8 8, class:^$, title:^$
 
 
         exec = pkill waybar; waybar
