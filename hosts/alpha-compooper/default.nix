@@ -115,7 +115,6 @@
 
     pkgs.vesktop
     # pkgs.discord
-    pkgs.karere
     pkgs.proton-vpn
     pkgs.syncthing
     pkgs.btop
