@@ -1,15 +1,11 @@
-{
-  pkgs,
-  username,
-  ...
+{ pkgs
+, username
+, ...
 }:
 
 {
   xdg.portal.wlr.enable = true;
-  services.displayManager.gdm = {
-    enable = true;
-    wayland = true;
-  };
+  services.displayManager.gdm. enable = true;
   environment.systemPackages = with pkgs; [
     libnotify
   ];
@@ -22,7 +18,7 @@
 
   home-manager.users.${username} = {
     home.packages = with pkgs; [
-      swww
+      awww
       wofi
       grim
       slurp

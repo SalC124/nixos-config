@@ -9,7 +9,7 @@
   environment.systemPackages = [
 
     # inputs.nixpkgs-unstable.godot
-    (pkgs.callPackage ../../../pkgs-unstable/godot4_6/package.nix { })
+    # (pkgs.callPackage ../../../pkgs-unstable/godot4_6/package.nix { })
     pkgs.pixelorama
     # pkgs.looking-glass-client
     pkgs.obs-studio
@@ -22,6 +22,7 @@
     # pkgs.modrinth-app
     pkgs.ferium
     pkgs.prismlauncher
+    pkgs.javaPackages.compiler.temurin-bin.jre-25
 
     # pkgs.retroarch-full
     # pkgs.retroarch-assets
