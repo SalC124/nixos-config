@@ -6,8 +6,6 @@
 {
   environment.systemPackages = [
 
-    # inputs.nixpkgs-unstable.godot
-    (pkgs.callPackage ../../../pkgs-unstable/godot4_6/package.nix { })
     pkgs.pixelorama
     pkgs.obs-studio
     pkgs.gnome-sudoku

@@ -60,15 +60,12 @@
 
     pkgs.zellij
 
-    pkgs.neofetch
     # pkgs.arduino
     pkgs.arduino-ide
     pkgs.arduino-cli
     # pkgs.arduino-core
     # pkgs.arduino-ide
     pkgs.simulide
-    # pkgs.vscode-fhs
-    pkgs.vscode-fhs
     # pkgs.python312Packages.matplotlib
 
     # pkgs.libgcc
@@ -118,8 +115,7 @@
 
     pkgs.vesktop
     # pkgs.discord
-    pkgs.wasistlos
-    pkgs.protonvpn-gui
+    pkgs.proton-vpn
     pkgs.syncthing
     pkgs.btop
     pkgs.zenith
@@ -174,8 +170,6 @@
     # pkgs.trunk
     # pkgs.dioxus-cli
     # pkgs.cargo-tauri
-
-    pkgs.surrealdb
 
     # esp32 + rust
     # pkgs.git
@@ -260,7 +254,11 @@
 
     pkgs.kicad
 
-    inputs.zed-editor.packages.x86_64-linux.default
+    # inputs.zed-editor.packages.x86_64-linux.default
+
+    # inputs.move-fast-and-break-stuff.zed-editor // no good.
+    #❯ zeditor --foreground ./
+    #/nix/store/0jcc5yv7qpp6gm039sw37r4lgx1z8qq6-zed-editor-1.12.0/libexec/zed-editor: /nix/store/hh698a2nnpqr47lh52n26wi8fiah3hid-gcc-13.3.0-lib/lib/libstdc++.so.6: version `CXXABI_1.3.15' not found (required by /nix/store/0jcc5yv7qpp6gm039sw37r4lgx1z8qq6-zed-editor-1.12.0/libexec/zed-editor)
   ];
   programs.nix-ld.enable = true;
 
@@ -282,10 +280,8 @@
     pkgs.via
     pkgs.arduino-core
     pkgs.wireguard-tools
-    pkgs.protonvpn-gui
+    pkgs.proton-vpn
   ];
-
-  programs.adb.enable = true;
 
   hardware.uinput.enable = true;
 
@@ -326,7 +322,6 @@
 
   services.ollama = {
     enable = true;
-    acceleration = "rocm";
     package = inputs.nixpkgs-unstable.ollama-rocm;
     rocmOverrideGfx = "11.0.0";
     environmentVariables = {

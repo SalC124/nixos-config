@@ -2,13 +2,14 @@
   activeTheme,
   pkgs,
   username,
+  inputs,
   ...
 }:
 {
   home-manager.users.${username} =
     { ... }:
     {
-      home.packages = [ pkgs.hyprpaper ];
+      home.packages = [ inputs.i-dont-want-to-configure-hyprland-rn-bro.hyprpaper ];
       home.file.".config/hypr/hyprpaper.conf" = {
         force = true;
         text = ''
