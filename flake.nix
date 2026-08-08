@@ -2,30 +2,27 @@
   description = "system flake (now dendritic!)";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-26.05";
-    i-dont-want-to-configure-hyprland-rn-bro.url = "github:nixos/nixpkgs?ref=nixos-25.11";
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-25.11";
     uncpkgs.url = "github:nixos/nixpkgs?ref=nixos-24.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     zed-editor.url = "github:zed-industries/zed/5ec84a926ef83865afb92d2a3d1ca3b419572cf9";
     home-manager = {
-      url = "github:nix-community/home-manager/release-26.05";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    move-fast-and-break-stuff.url = "github:nixos/nixpkgs/06305b512970f636f3824a860338631b780c43e7";
   };
 
   outputs =
-    { nixpkgs
-    , nixos-hardware
-    , zen-browser
-    , uncpkgs
-    , nixpkgs-unstable
-    , zed-editor
-    , move-fast-and-break-stuff
-    , i-dont-want-to-configure-hyprland-rn-bro
-    , ...
+    {
+      nixpkgs,
+      nixos-hardware,
+      zen-browser,
+      uncpkgs,
+      nixpkgs-unstable,
+      zed-editor,
+      ...
     }@inputs:
     let
       # this config expects to be located in ~/nixos-config/
@@ -40,22 +37,13 @@
           inherit system;
           config.allowUnfree = true;
         };
-        move-fast-and-break-stuff = import move-fast-and-break-stuff {
-          inherit system;
-          config.allowUnfree = true;
-        };
-        i-dont-want-to-configure-hyprland-rn-bro = import i-dont-want-to-configure-hyprland-rn-bro
-          {
-            inherit system;
-            config.allowUnfree = true;
-          };
       };
       mkHost =
-        { hostname
-        , username
-        , theme ? "catppuccin-mocha"
-        , modules
-        ,
+        {
+          hostname,
+          username,
+          theme ? "catppuccin-mocha",
+          modules,
         }:
         let
           allThemes = import ./data/themes.nix {
@@ -104,7 +92,6 @@
             ./modules/nixos/services/syncthing.nix
             ./modules/nixos/desktop/gtk.nix
             ./modules/nixos/services/flatpak.nix
-            # ./modules/nixos/features/vfio.nix
           ];
           theme = "catppuccin-frappe";
         };

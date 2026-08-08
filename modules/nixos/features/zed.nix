@@ -1,26 +1,9 @@
 {
   username,
   activeTheme,
-  inputs,
-  pkgs,
   ...
 }:
-let
-  zedWrapped = pkgs.symlinkJoin {
-    name = "zed";
-    paths = [ inputs.move-fast-and-break-stuff.zed-editor ];
-    buildInputs = [ pkgs.makeWrapper ];
-    postBuild = ''
-      # clear LD_LIBRARY_PATH side effect from env var injection
-      wrapProgram $out/bin/zeditor \
-        --unset LD_LIBRARY_PATH
-    '';
-  };
-in
 {
-  environment.systemPackages = [
-    zedWrapped
-  ];
   home-manager.users.${username} =
     { config, ... }:
     {
@@ -63,11 +46,33 @@ in
               },
               "linked_edits": true,
               "colorize_brackets": true,
-              "disable_ai": false,
-              "show_edit_predictions": true,
+              "disable_ai": true,
+              "show_edit_predictions": false,
+              "edit_predictions": {
+                "mode": "eager",
+                "copilot": {
+                  "enable_next_edit_suggestions": false,
+                },
+                "provider": "copilot",
+              },
               "git": {
                 "inline_blame": {
                   "show_commit_summary": false,
+                },
+              },
+              "agent_servers": {
+                "github-copilot-cli": {
+                  "type": "registry"
+                },
+                "github-copilot": {
+                  "default_model": "claude-opus-4.6",
+                  "default_mode": "Ask",
+                  "favorite_models": [
+                    "claude-opus-4.6",
+                    "claude-sonnet-4.6",
+                    "claude-haiku-4.5",
+                  ],
+                  "type": "registry",
                 },
               },
               "preview_tabs": {
@@ -140,15 +145,56 @@ in
                 .${activeTheme.name} or "Zed (Default)"
               }",
               "agent": {
-                "dock": "right",
-                "sidebar_side": "right",
+                "dock": "left",
                 "show_turn_stats": true,
                 "single_file_review": true,
                 "use_modifier_to_send": true,
                 "notify_when_agent_waiting": "primary_screen",
+                "favorite_models": [
+                  {
+                    "provider": "copilot_chat",
+                    "model": "claude-opus-4.6",
+                    "enable_thinking": false,
+                  },
+                  {
+                    "provider": "copilot_chat",
+                    "model": "claude-sonnet-4.6",
+                    "enable_thinking": false,
+                  },
+                  {
+                    "provider": "ollama",
+                    "model": "gemma2:2b",
+                    "enable_thinking": false,
+                  },
+                ],
+                "inline_assistant_model": {
+                  // "provider": "copilot_chat",
+                  "provider": "copilot_chat",
+                  // "model": "gpt-4.1"
+                  "model": "gpt-4o",
+                },
+                "default_model": {
+                  "provider": "copilot_chat",
+                  "model": "gpt-4o",
+                },
+                "commit_message_model": {
+                  "provider": "copilot_chat",
+                  "model": "claude-haiku-4.5",
+                },
+                "default_profile": "ask",
+                "model_parameters": [],
               },
+              // "file_watcher": {
+              //   "exclude": [
+              //     "**/.steam/**",
+              //     "**/.local/share/Steam/**",
+              //     "**/node_modules/**",
+              //     "**/target/**"
+              //   ]
+              // },
               "vim_mode": true,
               "ui_font_size": 18,
+              // "ui_font_family": ".SystemUIFont",
               "ui_font_family": "CaskaydiaCove Nerd Font",
               "buffer_font_size": 18,
               "buffer_font_family": "CaskaydiaCove Nerd Font",
@@ -286,9 +332,6 @@ in
                 },
                 "rust-analyzer": {
                   "initialization_options": {
-                    "diagnostics": {
-                      "styleLints": { "enable": true },
-                    },
                     "inlayHints": {
                       "closureCaptureHints": { "enable": true },
                       "closureReturnTypeHints": { "enable": "always" },

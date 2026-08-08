@@ -3,7 +3,6 @@
   lib,
   username,
   activeTheme,
-  inputs,
   ...
 }:
 
@@ -37,12 +36,20 @@ in
   services.logind.settings.Login.HandleLidSwitch = "ignore";
   services.logind.settings.Login.HandlePowerKey = "suspend";
 
-  services.gnome.gnome-keyring.enable = true;
-  security.pam.services.hyprland.enableGnomeKeyring = true;
-  security.pam.services.login.enableGnomeKeyring = true;
-
-  security.polkit.enable = true;
-
+  security.pam.services.hyprland = {
+    text = ''
+      auth       optional    pam_gnome_keyring.so
+      session    optional    pam_gnome_keyring.so auto_start
+    '';
+  };
+  security.pam.services."system-local-login".text = ''
+    auth       optional    pam_gnome_keyring.so
+    session    optional    pam_gnome_keyring.so auto_start
+  '';
+  security.pam.services."gdm-password".text = ''
+    auth       optional    pam_gnome_keyring.so
+    session    optional    pam_gnome_keyring.so auto_start
+  '';
   programs.hyprland = {
     enable = true;
     # # set the flake package
@@ -52,7 +59,6 @@ in
 
     # # withUWSM = true;
     xwayland.enable = true;
-    package = inputs.i-dont-want-to-configure-hyprland-rn-bro.hyprland;
   };
 
   # nix.settings = {
@@ -69,6 +75,7 @@ in
   home-manager.users.${username} = {
     home.packages = [
       pkgs.swaynotificationcenter
+      pkgs.hyprpolkitagent
       pkgs.hyprlock
       pkgs.waybar
 
@@ -78,6 +85,8 @@ in
 
       pkgs.hyprshot
       pkgs.hyprpicker
+      pkgs.swaynotificationcenter
+      pkgs.hyprlock
       # pkgs.hypridle # probably wont end up using it
       # pkgs.pavucontrol
       pkgs.pamixer
