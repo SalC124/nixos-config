@@ -43,7 +43,7 @@
   # $ nix search wget
   nixpkgs.config.allowUnfreePredicate = nixpkgs-: true;
   environment.systemPackages = [
-    pkgs.microsoft-edge
+    inputs.move-fast-and-break-stuff.microsoft-edge
 
     pkgs.lshw
     pkgs.ntfs3g

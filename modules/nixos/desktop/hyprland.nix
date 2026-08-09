@@ -148,7 +148,8 @@ in
         # Set programs that you use
         $terminal = kitty
         $fileManager = nautilus
-        $browser = microsoft-edge --profile-directory="Profile 12"
+        # $browser = microsoft-edge --profile-directory="Profile 12"
+        $browser = zen -P Personal --new-window
         $school_browser = zen -p nouveau --new-tab https://salc124.github.io/ # firefox # microsoft-edge --profile-directory="Profile 13" --new-window salc124.github.io
         $launcher = fuzzel
 

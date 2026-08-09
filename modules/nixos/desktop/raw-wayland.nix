@@ -1,11 +1,11 @@
-{ pkgs
-, username
-, ...
+{
+  pkgs,
+  username,
+  ...
 }:
 
 {
-  xdg.portal.wlr.enable = true;
-  services.displayManager.gdm. enable = true;
+  services.displayManager.gdm.enable = true;
   environment.systemPackages = with pkgs; [
     libnotify
   ];

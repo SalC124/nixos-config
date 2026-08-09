@@ -18,7 +18,7 @@
     pkgs.mangohud
 
     pkgs.lmms
-    pkgs.surge-XT
+    pkgs.surge-xt
   ];
 
   environment.sessionVariables = {
