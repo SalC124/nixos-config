@@ -17,15 +17,16 @@
   };
 
   outputs =
-    { nixpkgs
-    , nixos-hardware
-    , zen-browser
-    , uncpkgs
-    , nixpkgs-unstable
-    , zed-editor
-    , move-fast-and-break-stuff
-    , i-dont-want-to-configure-hyprland-rn-bro
-    , ...
+    {
+      nixpkgs,
+      nixos-hardware,
+      zen-browser,
+      uncpkgs,
+      nixpkgs-unstable,
+      zed-editor,
+      move-fast-and-break-stuff,
+      i-dont-want-to-configure-hyprland-rn-bro,
+      ...
     }@inputs:
     let
       # this config expects to be located in ~/nixos-config/
@@ -44,18 +45,17 @@
           inherit system;
           config.allowUnfree = true;
         };
-        i-dont-want-to-configure-hyprland-rn-bro = import i-dont-want-to-configure-hyprland-rn-bro
-          {
-            inherit system;
-            config.allowUnfree = true;
-          };
+        i-dont-want-to-configure-hyprland-rn-bro = import i-dont-want-to-configure-hyprland-rn-bro {
+          inherit system;
+          config.allowUnfree = true;
+        };
       };
       mkHost =
-        { hostname
-        , username
-        , theme ? "catppuccin-mocha"
-        , modules
-        ,
+        {
+          hostname,
+          username,
+          theme ? "catppuccin-mocha",
+          modules,
         }:
         let
           allThemes = import ./data/themes.nix {
@@ -97,14 +97,16 @@
             nixos-hardware.nixosModules.framework-16-7040-amd
             ./modules/nixos/hardware/amd.nix
             ./modules/nixos/core/boot-grub.nix
-            ./modules/nixos/desktop/hyprland.nix
+            ./modules/nixos/desktop/hyprland
             ./modules/nixos/features/starship.nix
             ./modules/nixos/features/zed.nix
             ./modules/nixos/features/extraneous.nix
             ./modules/nixos/services/syncthing.nix
             ./modules/nixos/desktop/gtk.nix
-            ./modules/nixos/services/flatpak.nix
+            # ./modules/nixos/services/flatpak.nix
             # ./modules/nixos/features/vfio.nix
+            ./modules/nixos/services/searxng.nix
+            # ./modules/nixos/services/simple-vm.nix
           ];
           theme = "catppuccin-frappe";
         };

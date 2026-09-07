@@ -1,9 +1,15 @@
 {
   activeTheme,
   username,
+  pkgs,
+  lib,
   ...
 }:
+let
+  waybar = pkgs.waybar;
+in
 {
+  _module.args = { inherit waybar; };
   home-manager.users.${username} =
     { ... }:
     {
@@ -112,9 +118,9 @@
                   ""
                 ]
               },
-              "on-click": "pamixer -t",
+              "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
               "scroll-step": 1,
-              "on-click-right": "kitty --class floating 'pulsemixer'"
+              "on-click-right": "kitty --class floating '${lib.getExe pkgs.pulsemixer}'"
             },
             "custom/notifications": {
               "format": "notifications",

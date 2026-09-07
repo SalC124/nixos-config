@@ -1,6 +1,7 @@
 {
   pkgs,
   username,
+  inputs,
   ...
 }:
 {
@@ -30,6 +31,7 @@
       enable = true;
       gamescopeSession.enable = true;
       extraCompatPackages = with pkgs; [ proton-ge-bin ];
+      package = inputs.i-dont-want-to-configure-hyprland-rn-bro.steam;
     };
     gamemode.enable = true;
   };

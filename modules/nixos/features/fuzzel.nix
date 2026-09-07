@@ -4,9 +4,13 @@
   username,
   ...
 }:
+let
+  fuzzel = pkgs.fuzzel;
+in
 {
+  _module.args = { inherit fuzzel; };
   home-manager.users.${username} = {
-    home.packages = [ pkgs.fuzzel ];
+    # home.packages = [ fuzzel ];
     home.file.".config/fuzzel/fuzzel.ini" = {
       force = true;
       text = ''

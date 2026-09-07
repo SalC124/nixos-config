@@ -35,7 +35,7 @@
 
   xdg.mime.enable = true;
   xdg.mime.defaultApplications = {
-    "text/html" = "microsoft-edge.desktop";
+    "text/html" = "zen-twilight.desktop";
   };
   # nixpkgs.config.nvidia.acceptLicense = true;p
 
@@ -43,8 +43,6 @@
   # $ nix search wget
   nixpkgs.config.allowUnfreePredicate = nixpkgs-: true;
   environment.systemPackages = [
-    inputs.move-fast-and-break-stuff.microsoft-edge
-
     pkgs.lshw
     pkgs.ntfs3g
     pkgs.tree
@@ -157,38 +155,6 @@
     # general tso's chicken
     pkgs.ncspot
 
-    # pkgs.rustc
-    # pkgs.cargo
-    # pkgs.rustfmt
-    # pkgs.rustup
-    # pkgs.gccgo14
-    # pkgs.wasm-pack
-    # pkgs.cargo-generate
-    # pkgs.openssl
-    # pkgs.wasm-bindgen-cli
-    #
-    # pkgs.trunk
-    # pkgs.dioxus-cli
-    # pkgs.cargo-tauri
-
-    # esp32 + rust
-    # pkgs.git
-    # pkgs.wget
-    # pkgs.gnumake
-    # pkgs.flex
-    # pkgs.bison
-    # pkgs.gperf
-    # pkgs.pkg-config
-    # pkgs.cmake
-    # pkgs.ncurses5
-    # pkgs.ninja
-    # (pkgs.python3.withPackages (p: with p; [
-    #   pip
-    #   virtualenv
-    # ]))
-    # pkgs.espflash
-
-    pkgs.gcc-arm-embedded # 13 is broken
     pkgs.unixtools.xxd
 
     # pkgs.rust-analyzer
@@ -259,6 +225,10 @@
     # inputs.move-fast-and-break-stuff.zed-editor // no good.
     #❯ zeditor --foreground ./
     #/nix/store/0jcc5yv7qpp6gm039sw37r4lgx1z8qq6-zed-editor-1.12.0/libexec/zed-editor: /nix/store/hh698a2nnpqr47lh52n26wi8fiah3hid-gcc-13.3.0-lib/lib/libstdc++.so.6: version `CXXABI_1.3.15' not found (required by /nix/store/0jcc5yv7qpp6gm039sw37r4lgx1z8qq6-zed-editor-1.12.0/libexec/zed-editor)
+
+    (pkgs.spotatui.overrideAttrs (oldAtters: {
+      buildFeatures = oldAtters.buildFeatures ++ [ "ai-dj" ];
+    }))
   ];
   programs.nix-ld.enable = true;
 
@@ -279,6 +249,7 @@
   services.udev.packages = [
     pkgs.via
     pkgs.arduino-core
+    pkgs.probe-rs-tools
     pkgs.wireguard-tools
     pkgs.proton-vpn
   ];
@@ -345,7 +316,7 @@
   xdg.portal.enable = true;
 
   hardware.bluetooth.enable = true; # enables support for Bluetooth
-  hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
+  hardware.bluetooth.powerOnBoot = false; # powers up the default Bluetooth controller on boot
 
   services.pulseaudio = {
     enable = false;

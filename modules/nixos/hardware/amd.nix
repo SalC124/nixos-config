@@ -36,4 +36,20 @@
 
   systemd.packages = with pkgs; [ lact ];
   systemd.services.lactd.wantedBy = [ "multi-user.target" ];
+
+  specialisation = {
+    igpu-only.configuration = {
+      system.nixos.tags = [ "igpu-only" ];
+
+      services.udev.extraRules = ''
+        # Framework 16 RX 7700S
+        ACTION=="add", SUBSYSTEM=="pci", KERNEL=="0000:03:00.0", \
+          ATTR{power/control}="auto", ATTR{remove}="1"
+
+        # RX 7700S HDMI/DP audio function
+        ACTION=="add", SUBSYSTEM=="pci", KERNEL=="0000:03:00.1", \
+          ATTR{power/control}="auto", ATTR{remove}="1"
+      '';
+    };
+  };
 }

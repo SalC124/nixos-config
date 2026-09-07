@@ -3,6 +3,7 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 {
   pkgs,
+  lib,
   inputs,
   username,
   ...
@@ -37,11 +38,11 @@
   };
 
   # Configure keymap in X11
-  services.xserver = {
-    xkb.layout = "us,es";
-    xkb.variant = "";
-    enable = true;
+  services.xserver.xkb = {
+    layout = "us,es";
+    variant = "";
   };
+  services.xserver.enable = lib.mkDefault true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.${username} = {

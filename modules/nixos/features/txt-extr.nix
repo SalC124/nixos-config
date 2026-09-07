@@ -4,7 +4,7 @@
   ...
 }:
 let
-  extractToClipboard = pkgs.writeShellApplication {
+  txt-extr = pkgs.writeShellApplication {
     name = "txt-extr";
     runtimeInputs = [
       pkgs.hyprshot
@@ -17,5 +17,6 @@ let
   };
 in
 {
-  home-manager.users.${username}.home.packages = [ extractToClipboard ];
+  _module.args = { inherit txt-extr; };
+  home-manager.users.${username}.home.packages = [ txt-extr ];
 }

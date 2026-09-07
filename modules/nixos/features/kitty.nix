@@ -4,11 +4,14 @@
   username,
   ...
 }:
+
+let
+  kitty = pkgs.kitty;
+in
 {
+  _module.args = { inherit kitty; };
   home-manager.users.${username} = {
-    home.packages = [
-      pkgs.kitty
-    ];
+    home.packages = [ pkgs.kitty ];
     home.file.".config/kitty/kitty.conf" = {
       force = true;
       text = ''
