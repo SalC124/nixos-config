@@ -14,6 +14,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     move-fast-and-break-stuff.url = "github:nixos/nixpkgs/06305b512970f636f3824a860338631b780c43e7";
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v1.1.0";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -26,6 +30,7 @@
       zed-editor,
       move-fast-and-break-stuff,
       i-dont-want-to-configure-hyprland-rn-bro,
+      lanzaboote,
       ...
     }@inputs:
     let
@@ -96,7 +101,7 @@
           modules = [
             nixos-hardware.nixosModules.framework-16-7040-amd
             ./modules/nixos/hardware/amd.nix
-            ./modules/nixos/core/boot-grub.nix
+            ./modules/nixos/core/boot-lanza_e.nix
             ./modules/nixos/desktop/hyprland
             ./modules/nixos/features/starship.nix
             ./modules/nixos/features/zed.nix
@@ -107,6 +112,7 @@
             # ./modules/nixos/features/vfio.nix
             ./modules/nixos/services/searxng.nix
             # ./modules/nixos/services/simple-vm.nix
+            lanzaboote.nixosModules.lanzaboote
           ];
           theme = "catppuccin-frappe";
         };
