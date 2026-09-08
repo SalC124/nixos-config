@@ -2,7 +2,6 @@
   activeTheme,
   pkgs,
   username,
-  inputs,
   ...
 }:
 
@@ -21,7 +20,7 @@ in
           wallpaper {
               monitor =
               path = ${activeTheme.wallpaper}
-              fit_mode = contain
+              fit_mode = cover
           }
           splash = false
         '';
