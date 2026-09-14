@@ -23,6 +23,7 @@ in
   };
 
   security.polkit.enable = true;
+  services.gnome.gnome-keyring.enable = true;
   environment.systemPackages = with pkgs; [
     hyprpolkitagent
   ];
@@ -34,6 +35,9 @@ in
     home.packages = [
       pkgs.wl-clipboard
       pkgs.hyprshot
+      pkgs.hyprpicker
+      pkgs.brightnessctl
+      pkgs.pulsemixer
 
       waybar
     ];

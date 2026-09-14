@@ -113,7 +113,7 @@
 
     pkgs.vesktop
     # pkgs.discord
-    pkgs.proton-vpn
+    inputs.move-fast-and-break-stuff.proton-vpn
     pkgs.syncthing
     pkgs.btop
     pkgs.zenith
@@ -251,7 +251,7 @@
     pkgs.arduino-core
     pkgs.probe-rs-tools
     pkgs.wireguard-tools
-    pkgs.proton-vpn
+    inputs.move-fast-and-break-stuff.proton-vpn
   ];
 
   hardware.uinput.enable = true;

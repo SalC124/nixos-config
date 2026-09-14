@@ -21,6 +21,16 @@
         #   suppress_event = "maximize";
         # }
       ];
+      workspace_rule = [
+        {
+          workspace = "6";
+          layout = "scrolling";
+        }
+        {
+          workspace = "7";
+          layout = "scrolling";
+        }
+      ];
     };
   };
 }

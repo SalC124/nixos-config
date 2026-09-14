@@ -136,6 +136,7 @@ in
                   "catppuccin-mocha" = "Catppuccin Mocha";
                   "catppuccin-frappe" = "Catppuccin Frappé";
                   "catppuccin-latte" = "Catppuccin Latte";
+                  "nord" = "Nord Dark";
                 }
                 .${activeTheme.name} or "Zed (Default)"
               }",

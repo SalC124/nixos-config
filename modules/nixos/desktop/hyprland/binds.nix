@@ -129,6 +129,26 @@
         }
         {
           _args = [
+            "SHIFT + XF86AudioRaiseVolume"
+            (lua ''hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 1%+")'')
+            {
+              locked = true;
+              repeating = true;
+            }
+          ];
+        }
+        {
+          _args = [
+            "SHIFT + XF86AudioLowerVolume"
+            (lua ''hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-")'')
+            {
+              locked = true;
+              repeating = true;
+            }
+          ];
+        }
+        {
+          _args = [
             "XF86AudioMute"
             (lua ''hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle")'')
             {
@@ -169,33 +189,77 @@
         }
         {
           _args = [
+            "SHIFT + XF86MonBrightnessUp"
+            (lua ''hl.dsp.exec_cmd("${bin pkgs.brightnessctl} -e4 -n2 set 1%+")'')
+            {
+              locked = true;
+              repeating = true;
+            }
+          ];
+        }
+        {
+          _args = [
+            "SHIFT + XF86MonBrightnessDown"
+            (lua ''hl.dsp.exec_cmd("${bin pkgs.brightnessctl} -e4 -n2 set 1%-")'')
+            {
+              locked = true;
+              repeating = true;
+            }
+          ];
+        }
+        {
+          _args = [
             "XF86AudioNext"
-            (lua ''hl.dsp.exec_cmd("${bin pkgs.playerctl} next")'')
+            (lua ''hl.dsp.exec_cmd("${bin pkgs.playerctl} -p spotify next")'')
             { locked = true; }
           ];
         }
         {
           _args = [
             "XF86AudioPause"
-            (lua ''hl.dsp.exec_cmd("${bin pkgs.playerctl} play-pause")'')
+            (lua ''hl.dsp.exec_cmd("${bin pkgs.playerctl} -p spotify play-pause")'')
             { locked = true; }
           ];
         }
         {
           _args = [
             "XF86AudioPlay"
-            (lua ''hl.dsp.exec_cmd("${bin pkgs.playerctl} play-pause")'')
+            (lua ''hl.dsp.exec_cmd("${bin pkgs.playerctl} -p spotify play-pause")'')
             { locked = true; }
           ];
         }
         {
           _args = [
             "XF86AudioPrev"
-            (lua ''hl.dsp.exec_cmd("${bin pkgs.playerctl} previous")'')
+            (lua ''hl.dsp.exec_cmd("${bin pkgs.playerctl} -p spotify previous")'')
             { locked = true; }
           ];
         }
-
+        {
+          _args = [
+            "Print"
+            (lua ''hl.dsp.exec_cmd("${bin pkgs.hyprshot} -m region -o ~/Pictures/Screenshots/ -z")'')
+          ];
+        }
+        {
+          _args = [
+            "SUPER + period"
+            (lua ''hl.dsp.layout("move +col")'')
+          ];
+        }
+        {
+          _args = [
+            "SUPER + comma"
+            # (lua ''hl.dsp.layout("swapcol l")'')
+            (lua ''hl.dsp.layout("move -col")'')
+          ];
+        }
+        {
+          _args = [
+            "SUPER + slash"
+            (lua ''hl.dsp.layout("swapcol r")'')
+          ];
+        }
       ]
       # workspaces
       ++ lib.flatten (
@@ -219,7 +283,65 @@
             ];
           }
         ]) ((lib.map (x: x + 1) (lib.genList (x: x) 9)) ++ [ 0 ]) (lib.genList (x: x + 1) 10)
-      );
+      )
+      # special workspaces
+      ++ lib.flatten (
+        lib.zipListsWith
+          (bind: workspace: [
+            {
+              _args = [
+                "SUPER + ${toString bind}"
+                (lua ''hl.dsp.workspace.toggle_special("${toString workspace}")'')
+              ];
+            }
+            {
+              _args = [
+                "SUPER + SHIFT + ${toString bind}"
+                (lua ''hl.dsp.window.move({workspace="special:${toString workspace}"})'')
+              ];
+            }
+            {
+              _args = [
+                "SUPER + SHIFT + CTRL + ${toString bind}"
+                (lua ''hl.dsp.window.move({workspace="special:${toString workspace}",follow=false})'')
+              ];
+            }
+          ])
+          [
+            "S"
+            "D"
+          ]
+          [
+            "S"
+            "D"
+          ]
+      )
+      ++ [
+        {
+          _args = [
+            "switch:on:Lid Switch"
+            (lua ''
+              function()
+                  hl.timer(function()
+                      hl.dispatch(hl.dsp.dpms({ action = "off" }))
+                  end, {timeout = 500, type = "oneshot"})
+              end
+            '')
+          ];
+        }
+        {
+          _args = [
+            "switch:off:Lid Switch"
+            (lua ''
+              function()
+                  hl.timer(function()
+                      hl.dispatch(hl.dsp.dpms({ action = "on" }))
+                  end, {timeout = 500, type = "oneshot"})
+              end
+            '')
+          ];
+        }
+      ];
     };
   };
 }

@@ -348,7 +348,7 @@ in
            * ----------------------------------------------------- */
 
           #custom-power {
-            background-color: ${activeTheme.base09};
+            background-color: ${activeTheme.base08};
             color: ${activeTheme.base00};
             margin-right: 12px;
           }
