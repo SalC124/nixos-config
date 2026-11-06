@@ -59,8 +59,8 @@
     pkgs.zellij
 
     # pkgs.arduino
-    pkgs.arduino-ide
-    pkgs.arduino-cli
+    inputs.move-fast-and-break-stuff.arduino-ide
+    inputs.move-fast-and-break-stuff.arduino-cli
     # pkgs.arduino-core
     # pkgs.arduino-ide
     pkgs.simulide
@@ -127,8 +127,9 @@
     pkgs.spotify
     pkgs.spotifyd
 
-    pkgs.onlyoffice-desktopeditors
-    pkgs.libreoffice
+    inputs.move-fast-and-break-stuff.onlyoffice-desktopeditors
+    inputs.move-fast-and-break-stuff.libreoffice
+    inputs.move-fast-and-break-stuff.wpsoffice
     pkgs.krita
     pkgs.gimp
     pkgs.lightworks
@@ -136,7 +137,6 @@
 
     pkgs.via
     pkgs.framework-tool
-    pkgs.corefonts
     pkgs.ngspice
 
     pkgs.cbonsai
@@ -226,9 +226,9 @@
     #❯ zeditor --foreground ./
     #/nix/store/0jcc5yv7qpp6gm039sw37r4lgx1z8qq6-zed-editor-1.12.0/libexec/zed-editor: /nix/store/hh698a2nnpqr47lh52n26wi8fiah3hid-gcc-13.3.0-lib/lib/libstdc++.so.6: version `CXXABI_1.3.15' not found (required by /nix/store/0jcc5yv7qpp6gm039sw37r4lgx1z8qq6-zed-editor-1.12.0/libexec/zed-editor)
 
-    (pkgs.spotatui.overrideAttrs (oldAtters: {
-      buildFeatures = oldAtters.buildFeatures ++ [ "ai-dj" ];
-    }))
+    pkgs.zathura
+
+    pkgs.google-chrome
   ];
   programs.nix-ld.enable = true;
 
@@ -261,7 +261,24 @@
   #   package = pkgs.mariadb;
   # };
 
-  services.printing.enable = true;
+  services.printing = {
+    enable = true;
+    drivers = with pkgs; [
+      gutenprint
+      hplip
+      splix
+    ];
+  };
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+  };
+
+  services.atd = {
+    enable = true;
+    allowEveryone = true;
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -311,13 +328,21 @@
     PATH = "/home/saltcal/Code/Personal/rust/projects/vanilla/dice/target/release:/home/saltcal/Code/Personal/rust/projects/vanilla/weather/target/release:/home/saltcal/.cargo/bin:/home/saltcal/Code/Personal/rust/projects/vanilla/prostrate_man/target/release:/home/saltcal/.rustup/toolchains/esp/xtensa-esp-elf/esp-14.2.0_20240906/xtensa-esp-elf/bin:$JAVA_HOME/bin:$PATH";
     PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
     ROCKET_CODEGEN_DEBUG = "1";
+    BEANS = "A4:77:58:4A:EF:3C";
+    HEAR = "CC:98:8B:DF:DC:22";
   };
 
   xdg.portal.enable = true;
 
-  hardware.bluetooth.enable = true; # enables support for Bluetooth
-  hardware.bluetooth.powerOnBoot = false; # powers up the default Bluetooth controller on boot
-
+  hardware.bluetooth = {
+    enable = true; # enables support for Bluetooth
+    powerOnBoot = false; # powers up the default Bluetooth controller on boot
+    settings = {
+      General = {
+        Enable = "Source,Sink,Media,Socket";
+      };
+    };
+  };
   services.pulseaudio = {
     enable = false;
     #   support32Bit = true;

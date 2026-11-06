@@ -9,6 +9,9 @@ let
   waybar = pkgs.waybar;
 in
 {
+  environment.systemPackages = [
+    pkgs.swaynotificationcenter
+  ];
   _module.args = { inherit waybar; };
   home-manager.users.${username} =
     { ... }:

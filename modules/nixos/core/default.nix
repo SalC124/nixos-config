@@ -115,7 +115,7 @@
     pkgs.man-pages
     pkgs.nh
     inputs.zen-browser.packages.x86_64-linux.twilight
-    pkgs.firefox
+    inputs.ff.firefox
     pkgs.ripgrep
     pkgs.fd
 
@@ -168,5 +168,8 @@
     nerd-fonts.caskaydia-cove
     nerd-fonts.fira-code
     cascadia-code
+    liberation_ttf
+    courier-prime
+    corefonts
   ];
 }

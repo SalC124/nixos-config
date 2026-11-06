@@ -172,14 +172,14 @@ in
                   .${activeTheme.name} or "One Dark"
                 }"
               },
-              // "experimental.theme_overrides": {
-              //   "background": "#00000000",
+              "theme_overrides": {
+              //   "background": "${activeTheme.base00}55",
               //   "background.appearance": "blurred",
               //   "border.variant": "#00000000",
               //   "editor.active_line.background": "#9c9ca240",
-              //   "editor.background": "#00000030",
-              //   "editor.gutter.background": "#00000030",
-              //   "panel.background": "#00000030",
+              //   "editor.background": "${activeTheme.base00}55",
+              //   "editor.gutter.background": "${activeTheme.base00}55",
+              //   "panel.background": "${activeTheme.base01}55",
               //   "scrollbar.track.border": "#00000000",
               //   "status_bar.background": "#00000030",
               //   "tab.active_background": "#ffffff10",
@@ -187,7 +187,7 @@ in
               //   "tab_bar.background": "#00000030",
               //   "title_bar.background": "#00000030",
               //   "toolbar.background": "#00000030",
-              // },
+              },
               "relative_line_numbers": "enabled",
               "tab_bar": {
                 "show": true,
@@ -226,8 +226,12 @@ in
                   "enabled": true,
                 },
               },
+              "cli_default_open_behavior": "new_window",
               "load_direnv": "shell_hook",
               "languages": {
+                "Assembly": {
+                  "tab_size": 2
+                },
                 "Rust": {
                   "show_edit_predictions": false,
                   "indent_guides": {

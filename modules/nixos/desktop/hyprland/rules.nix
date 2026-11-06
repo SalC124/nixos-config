@@ -20,6 +20,14 @@
         #   match.class = ".*";
         #   suppress_event = "maximize";
         # }
+        {
+          match.initial_class = "labreconlinux.exe";
+          float = true;
+        }
+        {
+          match.initial_class = "lrcoder.exe";
+          float = true;
+        }
       ];
       workspace_rule = [
         {

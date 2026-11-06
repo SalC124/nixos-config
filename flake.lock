@@ -30,6 +30,22 @@
         "type": "github"
       }
     },
+    "ff": {
+      "locked": {
+        "lastModified": 1790635395,
+        "narHash": "sha256-bNyvoIyOCu7lzoCpWKWGIsHpTtERUWzqYWFPlN++WTw=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "7fc6f2c20af09cdcaf48b92ec3121860139ec668",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-26.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -304,6 +320,7 @@
     },
     "root": {
       "inputs": {
+        "ff": "ff",
         "home-manager": "home-manager",
         "i-dont-want-to-configure-hyprland-rn-bro": "i-dont-want-to-configure-hyprland-rn-bro",
         "lanzaboote": "lanzaboote",

@@ -11,7 +11,7 @@
     pkgs.obs-studio
     pkgs.gnome-sudoku
     pkgs.protonup-ng
-    pkgs.r2modman
+    inputs.move-fast-and-break-stuff.r2modman
 
     pkgs.prismlauncher
     pkgs.javaPackages.compiler.temurin-bin.jre-25

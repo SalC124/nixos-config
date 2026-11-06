@@ -25,7 +25,7 @@
         _var = "zen-twilight -P Personal";
       };
       schoolBrowser = {
-        _var = "zen-twilight -p nouveau --new-tab https://salc124.github.io/";
+        _var = "zen-twilight -p nouveau";
       };
 
       bind = [
@@ -64,7 +64,7 @@
         }
         {
           _args = [
-            "SUPER + M"
+            "CTRL + ALT + DELETE"
             (lua ''hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'")'')
           ];
         }
@@ -99,6 +99,12 @@
             (lua "hl.dsp.window.fullscreen({mode='fullscreen',action='toggle'})")
           ];
         }
+        {
+          _args = [
+            "SUPER + M"
+            (lua "hl.dsp.window.fullscreen({mode='maximized',action='toggle'})")
+          ];
+        }
 
         {
           _args = [
@@ -110,7 +116,7 @@
         {
           _args = [
             "XF86AudioRaiseVolume"
-            (lua ''hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+")'')
+            (lua ''hl.dsp.exec_cmd("wpctl set-volume -l 3 @DEFAULT_AUDIO_SINK@ 5%+")'')
             {
               locked = true;
               repeating = true;
@@ -120,7 +126,7 @@
         {
           _args = [
             "XF86AudioLowerVolume"
-            (lua ''hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-")'')
+            (lua ''hl.dsp.exec_cmd("wpctl set-volume -l 3 @DEFAULT_AUDIO_SINK@ 5%-")'')
             {
               locked = true;
               repeating = true;
@@ -130,7 +136,7 @@
         {
           _args = [
             "SHIFT + XF86AudioRaiseVolume"
-            (lua ''hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 1%+")'')
+            (lua ''hl.dsp.exec_cmd("wpctl set-volume -l 3 @DEFAULT_AUDIO_SINK@ 1%+")'')
             {
               locked = true;
               repeating = true;
@@ -140,7 +146,7 @@
         {
           _args = [
             "SHIFT + XF86AudioLowerVolume"
-            (lua ''hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-")'')
+            (lua ''hl.dsp.exec_cmd("wpctl set-volume -l 3 @DEFAULT_AUDIO_SINK@ 1%-")'')
             {
               locked = true;
               repeating = true;

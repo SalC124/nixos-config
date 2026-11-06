@@ -5,6 +5,7 @@
 
   waybar,
   hyprpaper,
+  pkgs,
   ...
 }:
 
@@ -24,6 +25,7 @@
               function()
                 hl.exec_cmd("${bin waybar}")
                 hl.exec_cmd("${bin hyprpaper}")
+                hl.exec_cmd("${bin pkgs.swaynotificationcenter}")
               end
             '')
           ];

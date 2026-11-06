@@ -18,6 +18,7 @@
       url = "github:nix-community/lanzaboote/v1.1.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    ff.url = "github:nixos/nixpkgs?ref=nixos-26.05";
   };
 
   outputs =
@@ -31,6 +32,7 @@
       move-fast-and-break-stuff,
       i-dont-want-to-configure-hyprland-rn-bro,
       lanzaboote,
+      ff,
       ...
     }@inputs:
     let
@@ -51,6 +53,10 @@
           config.allowUnfree = true;
         };
         i-dont-want-to-configure-hyprland-rn-bro = import i-dont-want-to-configure-hyprland-rn-bro {
+          inherit system;
+          config.allowUnfree = true;
+        };
+        ff = import ff {
           inherit system;
           config.allowUnfree = true;
         };
@@ -114,8 +120,11 @@
             # ./modules/nixos/services/simple-vm.nix
             lanzaboote.nixosModules.lanzaboote
             ./modules/nixos/features/unity.nix
+            ./modules/nixos/features/console.nix
+            ./modules/nixos/features/wine.nix
+            ./modules/nixos/features/nvim
           ];
-          theme = "catppuccin-frappe";
+          # theme = "catppuccin-frappe";
         };
 
         gamma-compooper = mkHost {
