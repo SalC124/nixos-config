@@ -119,10 +119,7 @@
             ./modules/nixos/services/searxng.nix
             # ./modules/nixos/services/simple-vm.nix
             lanzaboote.nixosModules.lanzaboote
-            ./modules/nixos/features/unity.nix
             ./modules/nixos/features/console.nix
-            ./modules/nixos/features/wine.nix
-            ./modules/nixos/features/nvim
           ];
           # theme = "catppuccin-frappe";
         };
