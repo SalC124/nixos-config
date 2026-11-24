@@ -231,6 +231,8 @@
     pkgs.google-chrome
 
     pkgs.godotPackages_4_7.godot
+
+    (pkgs.callPackage ../../my-pkgs/claude/package.nix { })
   ];
   programs.nix-ld.enable = true;
 
