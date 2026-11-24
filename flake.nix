@@ -19,6 +19,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     ff.url = "github:nixos/nixpkgs?ref=nixos-26.05";
+    claude-desktop.url = "github:nmcbride/claude-desktop-nix";
   };
 
   outputs =
@@ -33,6 +34,7 @@
       i-dont-want-to-configure-hyprland-rn-bro,
       lanzaboote,
       ff,
+      claude-desktop,
       ...
     }@inputs:
     let
@@ -120,6 +122,11 @@
             # ./modules/nixos/services/simple-vm.nix
             lanzaboote.nixosModules.lanzaboote
             ./modules/nixos/features/console.nix
+            claude-desktop.nixosModules.default
+            {
+              programs.claude-desktop.enable = true;
+              programs.claude-desktop.cowork.kvmUsers = [ "saltcal" ];
+            }
           ];
           # theme = "catppuccin-frappe";
         };

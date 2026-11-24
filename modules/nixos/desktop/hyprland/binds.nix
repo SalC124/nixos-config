@@ -105,6 +105,12 @@
             (lua "hl.dsp.window.fullscreen({mode='maximized',action='toggle'})")
           ];
         }
+        {
+          _args = [
+            "SUPER + V"
+            (lua "hl.dsp.window.float({action='toggle'})")
+          ];
+        }
 
         {
           _args = [
